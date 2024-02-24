@@ -11,6 +11,7 @@ body {
     padding: 0;
     box-sizing: border-box ;
     
+    
 }
 
 header{
@@ -305,7 +306,7 @@ header{
 .boite_module {
 
     min-height: 500px;
-    height: fit-content;
+
     min-width: 400px;
     width: 400px;
 
@@ -319,17 +320,19 @@ header{
     border-style: solid;
     border-color: antiquewhite;
     border-width: 3px;
+    vertical-align: middle;
+    
 }
 
 .boite_module_mini {
 
 
     margin-left: 5.3%;  
-    min-height: 200px;
-    height: fit-content;
+    min-height: 170px;
+
     min-width: 350px;
     width: 350px;
-
+    vertical-align: middle;
     margin-top: 9%;
     padding-bottom: 2%;
 
@@ -340,6 +343,33 @@ header{
     border-style: solid;
     border-color: antiquewhite;
     border-width: 3px;
+
+    text-align: center;
+
+    line-height: 40px;
+
+}
+
+
+.nom_utilisateur_publication{
+
+    width: 50%;
+    margin-top: 5%;
+    margin-left: 23%;
+    margin-bottom: -3%;
+
+
+    background-color:  rgba(117, 117, 117, 0.7);
+    backdrop-filter: blur(7px);
+    
+    border-radius: 8px;
+    border-style: solid;
+    border-color: rgb(144, 144, 144);
+    border-width: 3px;
+    text-align: center;
+    vertical-align: middle;
+    color: rgb(255, 222, 214);
+
 }
 
 
