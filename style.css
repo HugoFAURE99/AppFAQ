@@ -329,18 +329,18 @@ header{
 
 
     margin-left: 5.3%;  
-    height: 120px;
+    height: 80px;
     font-weight: 500;
 
 
     width: 350px;
     vertical-align: middle;
-    margin-top: 9%;
-    padding-bottom: 2%;
+    margin-top: 7%;
+    padding-bottom: 10%;
 
     background-color:  rgba(231, 208, 208,.1);
     backdrop-filter: blur(7px);
-    color: rgb(103, 103, 103);
+    color: rgb(158, 130, 130);
     border-radius: 5px;
     border-style: solid;
     border-color: rgb(226, 208, 183);
@@ -354,7 +354,6 @@ header{
     padding-right: 2%;
 
 }
-
 
 .nom_utilisateur_publication{
 
@@ -381,4 +380,30 @@ header{
 
 }
 
+.img_fleche
+{
+height: 30px;
+width: auto;
+padding-top: 7px;
+padding-left: 90px;
+}
 
+.boite_deconnecter {
+
+    height: 23px;
+    width: 120px;
+
+    margin-left: 63%;
+    margin-top: 2%;
+    text-align: center;
+
+    background-color:  rgba(250, 235, 215, 0.7);
+    backdrop-filter: blur(7px);
+    
+    border-radius: 5px;
+    border-style: solid;
+    border-color: antiquewhite;
+    border-width: 3px;
+    vertical-align: middle;
+    
+}
