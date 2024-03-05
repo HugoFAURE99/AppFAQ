@@ -16,7 +16,7 @@
         <div class="boite_deja_compte">
             <div class="deja_compte">
                 <div class="boite_par_ici">
-                    <span>Déjà un compte ? C'est par <a href="login.html">ici</a> !</span>
+                    <span>Déjà un compte ? C'est par <a href="login.php">ici</a> !</span>
 
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <h1>Créer un compte</h1>
             </div>
 
-            <form action="login.html" method="post">
+            <form action="login.php" method="post">
                 <div class="zone_formulaire">
 
                     <div class="boite_input">
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="boite_submit">
-                        <a href="message.html"><input type="submit" required="required" id="envoyer"></a>
+                        <a href="message.php"><input type="submit" required="required" id="envoyer"></a>
                     </div>
                 </div>
             </form>    

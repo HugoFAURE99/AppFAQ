@@ -20,7 +20,7 @@
                 <h1>Connectez-vous</h1>
             </div>
 
-            <form action="message.html" method="post">
+            <form action="message.php" method="post">
                 <div class="zone_formulaire">
 
                     <div class="boite_input">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="boite_submit">
-                        <a href="message.html"><input type="submit" id="envoyer"></a>
+                        <a href="message.php"><input type="submit" id="envoyer"></a>
                     </div>
                 </div>
             </form>    
@@ -42,7 +42,7 @@
 
         <div class="sous_login">
             <div class="boite_par_ici">
-                <span>Pas de compte ? Créez le <a href="register.html">ici</a> !</span>
+                <span>Pas de compte ? Créez le <a href="register.php">ici</a> !</span>
 
             </div>
         </div>

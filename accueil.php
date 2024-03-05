@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>AppFAQ confirmer suppression
-    </title>
+    <title>AppFAQ accueil</title>
 </head>
 
 <body>
@@ -20,17 +19,17 @@
     <div class="page">
         <div class="modif">
             <div class="entete">
-                <h1>Êtes-vous sûr ?</h1>
+                <h1>Accueil</h1>
             </div>
 
 
             <br>
             <div class="b_modif">
-                <a href="message.html"><span>Valider</span></a>
+                <a href="login.php"><span>Se connecter</span></a>
             </div>
             <br>
             <div class="b_modif">
-                <a href="modifier.html"><span>Annuler</span></a>
+                <a href="register.php"><span>Créer un compte</span></a>
             </div>
             <br>
 
@@ -41,21 +40,7 @@
 
 
     </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-<br><br><br>
-
-
-<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <footer>
         <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
     </footer>

@@ -30,12 +30,12 @@
             </div>
 
                 <div class="b_modif">
-                    <a href="message.html"><span>Valider</span></a>
+                    <a href="message.php"><span>Valider</span></a>
                 </div>
 
                 <br>
                 <div class="b_modif">
-                    <a href="message.html"><span>Revenir en arrière</span></a>
+                    <a href="message.php"><span>Revenir en arrière</span></a>
                 </div>
     
             

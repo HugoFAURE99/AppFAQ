@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>AppFAQ confirmer deconnexion</title>
+    <title>AppFAQ confirmer suppression
+    </title>
 </head>
 
 <body>
@@ -25,11 +26,11 @@
 
             <br>
             <div class="b_modif">
-                <a href="accueil.html"><span>Valider</span></a>
+                <a href="message.php"><span>Valider</span></a>
             </div>
             <br>
             <div class="b_modif">
-                <a href="message.html"><span>Annuler</span></a>
+                <a href="modifier.php"><span>Annuler</span></a>
             </div>
             <br>
 
@@ -39,7 +40,22 @@
 
 
 
-    </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <!-- brrrrr-->
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br><br><br>
+
+
+<br>
     <footer>
         <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
     </footer>

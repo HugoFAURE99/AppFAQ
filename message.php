@@ -15,10 +15,10 @@
             <h1>AppFAQ</h1>
         </div>
         <div class="boite_deconnecter">
-            <a href="confirmer_deconnection.html"><span>Se déconnecter</span></a>
+            <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
         </div>
         <div class="boite_rediger">
-            <a href="rediger.html"><span>Rédiger un message</span></a>
+            <a href="rediger.php"><span>Rédiger un message</span></a>
         </div>
 
     </header>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="boite_modifier">
-                <a href="modifier.html"><span>modifier</span></a>
+                <a href="modifier.php"><span>modifier</span></a>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
             </div>
 
             <div class="boite_modifier">
-                <a href="modifier.html"><span>modifier</span></a>
+                <a href="modifier.php"><span>modifier</span></a>
             </div>
         </div>
 
@@ -117,7 +117,7 @@
             </div>
 
             <div class="boite_modifier">
-                <a href="modifier.html"><span>modifier</span></a>
+                <a href="modifier.php"><span>modifier</span></a>
             </div>
         </div>
 
@@ -150,7 +150,7 @@
             </div>
 
             <div class="boite_modifier">
-                <a href="modifier.html"><span>modifier</span></a>
+                <a href="modifier.php"><span>modifier</span></a>
             </div>
         </div>
 
