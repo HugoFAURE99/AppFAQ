@@ -746,3 +746,33 @@ footer {
     bottom: 1;
     width: 100%;
 }
+
+#choix_ligue {
+
+    width: 100%;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: antiquewhite;
+    border-radius: 5px;
+    background: rgba(205, 145, 138, 0.2);
+    outline: none;
+
+    color: antiquewhite;
+    font-weight: 900;
+    font-size: 100%;
+
+    transition: 0.5s;
+
+}
+
+#choix_ligue option {
+
+    
+    
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 100%;
+
+
+}

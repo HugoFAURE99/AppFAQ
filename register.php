@@ -31,11 +31,11 @@
                 <h1>Créer un compte</h1>
             </div>
 
-            <form action="login.php" method="post">
+            <form action="<?php $_SERVER ["PHP_SELF"] ?>" method="post">
                 <div class="zone_formulaire">
 
                     <div class="boite_input">
-                        <input type="text" required="required">
+                        <input type="email" required="required">
                         <span>Identifiant</span required="required">
                     </div>
 
@@ -47,6 +47,15 @@
                     <div class="boite_input">
                         <input type="password" required="required">
                         <span>Veuillez le confirmer</span>
+                    </div>
+
+                    <div class="boite_input">
+                        <select name="choix_ligue" id="choix_ligue">
+                            <option value="0" selected="selected">Football</option>
+                            <option value="1">Basketball</option>
+                            <option value="2">Volleyball</option>
+                            <option value="3">Handball</option>
+                        </select>
                     </div>
 
                     <div class="boite_submit">
