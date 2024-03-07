@@ -34,23 +34,29 @@
             <form action="<?php $_SERVER ["PHP_SELF"] ?>" method="post">
                 <div class="zone_formulaire">
 
+
                     <div class="boite_input">
-                        <input type="email" required="required">
+                        <input type="text" name="pseudo" required="required">
+                        <span>Pseudo</span required="required">
+                    </div>
+
+                    <div class="boite_input">
+                        <input type="email" name="mail" required="required">
                         <span>Identifiant</span required="required">
                     </div>
 
                     <div class="boite_input">
-                        <input type="password" required="required">
+                        <input type="password" name="mdp" required="required">
                         <span>Mot de passe</span>
                     </div>
 
                     <div class="boite_input">
-                        <input type="password" required="required">
+                        <input type="password" name="mdp_check" required="required">
                         <span>Veuillez le confirmer</span>
                     </div>
 
                     <div class="boite_input">
-                        <select name="choix_ligue" id="choix_ligue">
+                        <select name="id_ligue" id="choix_ligue" required="required">
                             <option value="0" selected="selected">Football</option>
                             <option value="1">Basketball</option>
                             <option value="2">Volleyball</option>
