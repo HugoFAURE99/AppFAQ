@@ -62,10 +62,11 @@
 
                     <div class="boite_input">
                         <select name="id_ligue" id="choix_ligue" required="required">
-                            <option value="0" selected="selected">Football</option>
+                            <option value="0" >Football</option>
                             <option value="1">Basketball</option>
                             <option value="2">Volleyball</option>
                             <option value="3">Handball</option>
+                            <option value="5" selected="selected">Choisir une ligue ...</option>
                         </select>
                     </div>
 
@@ -73,7 +74,17 @@
                         <a href="message.php"><input type="submit" name="submit" required="required" id="envoyer"></a>
                     </div>
                 </div>
-            </form>    
+            </form>
+            
+            <?php
+
+                $submit = isset($_POST["submit"]);
+
+                if($submit){
+
+                    db_add_user();
+                }
+            ?>
         </div>
 
         
@@ -83,18 +94,5 @@
         <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
     </footer>
 
-    <?php
-
-    
-
-    $submit = isset($_POST["submit"]);
-
-    if($submit){
-
-        db_add_user();
-    }
-
-
-    ?>
 </body>
 </html>
