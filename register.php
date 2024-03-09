@@ -1,3 +1,8 @@
+<?php
+    include "fonctions/fonctions.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +36,7 @@
                 <h1>Créer un compte</h1>
             </div>
 
-            <form action="<?php $_SERVER ["PHP_SELF"] ?>" method="post">
+            <form action="<?php $_SERVER ["PHP_SELF"] ?>" method="POST">
                 <div class="zone_formulaire">
 
 
@@ -65,7 +70,7 @@
                     </div>
 
                     <div class="boite_submit">
-                        <a href="message.php"><input type="submit" required="required" id="envoyer"></a>
+                        <a href="message.php"><input type="submit" name="submit" required="required" id="envoyer"></a>
                     </div>
                 </div>
             </form>    
@@ -77,5 +82,19 @@
     <footer>
         <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
     </footer>
+
+    <?php
+
+    
+
+    $submit = isset($_POST["submit"]);
+
+    if($submit){
+
+        db_add_user();
+    }
+
+
+    ?>
 </body>
 </html>
