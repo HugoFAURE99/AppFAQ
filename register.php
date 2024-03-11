@@ -62,11 +62,35 @@
 
                     <div class="boite_input">
                         <select name="id_ligue" id="choix_ligue" required="required">
-                            <option value="0" >Football</option>
-                            <option value="1">Basketball</option>
-                            <option value="2">Volleyball</option>
-                            <option value="3">Handball</option>
-                            <option value="5" selected="selected">Choisir une ligue ...</option>
+                        
+                        
+                        
+                        <?php
+
+                            $dbh = db_connect();
+
+                            //RECUPERATION DES LIBELLES DES LIGUES ET AFFICHAGE EN DROP DOWN LIST
+                                $sql_lib_ligue = "select lib_ligue, ligue.id_ligue from ligue";
+                                $i = 0;
+
+                                try {
+                                    $sth = $dbh->prepare($sql_lib_ligue);
+                                    $sth->execute();
+                                    $lib_ligue_bdd = $sth->fetchAll(PDO::FETCH_ASSOC);
+                                    } catch (PDOException $ex) {
+                                    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+                                    }
+
+                                foreach ($lib_ligue_bdd as $row){
+
+                                    echo '<option value="'.$row['id_ligue'].'">'.$row['lib_ligue'].'</option>';
+
+                                    $i++;
+                                }
+
+                                echo '<option value="'.($i).'" selected="selected">Choisir une ligue...</option>';
+                            ?>
+
                         </select>
                     </div>
 
@@ -96,3 +120,6 @@
 
 </body>
 </html>
+
+
+
