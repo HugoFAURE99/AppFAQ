@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 //FONCTION DE CONNECTION A LA BDD APPFAQ
       function db_connect() {
         $dsn = 'mysql:host=localhost;dbname=appfaq';  // contient le nom du serveur et de la base
