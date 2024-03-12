@@ -17,7 +17,7 @@
         function db_add_user() {
 
             //TRUE SI USER CREE OU RESTE FALSE SI PAS CREE
-            $_POST['user_cree'] = FALSE;
+            $_GET['user_cree'] = FALSE;
 
             //CONNECTION A LA BDD
             $dbh = db_connect();
@@ -30,7 +30,7 @@
             $mail = isset($_POST['mail']) ? $_POST['mail'] : "";
             $id_usertype = "0";
             $id_ligue = isset($_POST['id_ligue']) ? $_POST['id_ligue'] : "0";
-            $i = isset($_POST['i_value']) ? $_POST['i_value'] : "";
+            $i = isset($_GET['i_value']) ? $_GET['i_value'] : "";
 
 
             //REQUETE POUR VOIR SI PSEUDO DEJA DANS LA BDD
@@ -109,6 +109,33 @@
                     echo '<meta http-equiv="refresh" content="5;URL=\'http://localhost/projets/AppFAQ/AppFAQ/login.php\'">'; // REDIRECTION APRES 5 SECONDES VERS LOGIN.PHP (ATTENTION L'URL MARCHE SUR MON PC MAIS PAS AILLEURS JE PENSE)
                 }
               }
+
+function userLogin()
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+}
     
 
 ?>

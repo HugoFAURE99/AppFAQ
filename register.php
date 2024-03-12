@@ -4,7 +4,6 @@
     session_start();
 
     if (isset($_SESSION['pseudo'])){
-
         header("Location: index.php");
         exit();
     }
@@ -97,7 +96,7 @@
                                 }
 
                                 echo '<option value="'.($i).'" selected="selected">Choisir une ligue...</option>';
-                                $_POST['i_value']=$i;
+                                $_GET['i_value']=$i;
                             ?>
 
                         </select>
@@ -114,15 +113,14 @@
                 $submit = isset($_POST["submit"]);
 
                 if($submit){
-
                     db_add_user();
 
-                    if($_POST['user_cree']==true){
+                    if($_GET['user_cree']==true){
 
                         $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
                         $_SESSION['pseudo']=$pseudo;
 
-                        echo "<p>".$_SESSION['pseudo']."</p>";
+                        echo "<p> Session de : ".$_SESSION['pseudo']."</p>";
                     }
                 }
             ?>
