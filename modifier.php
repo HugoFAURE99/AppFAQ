@@ -14,6 +14,9 @@
         <div class="titre">
             <h1>AppFAQ</h1>
         </div>
+        <div class="boite_deconnecter">
+            <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
+        </div>
     </header>
 
     <div class="page">

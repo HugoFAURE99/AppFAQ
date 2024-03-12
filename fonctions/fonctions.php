@@ -99,7 +99,7 @@
                     die("Erreur lors de la requête SQL : " . $ex->getMessage());
                     }
 
-                    $_POST['user_cree']=true;
+                    $_GET['user_cree']=true;
 
                     echo "<p class='message_validation'>Compte créé avec succés !</p>";
                     echo "<p class='message_validation'>Redirection vers login dans 5 sec !</p>";
@@ -162,4 +162,18 @@ function userLogin(){
     echo "<p> Le compte n'existe pas ! </p>";
   }
 }
+
+
+
+// FONCTION DE DECONNEXION 
+function deconnexion() {
+
+  session_unset(); // Détruit toutes les variables de session
+  session_destroy(); // Détruit la session (mais pas le cookie)
+  setcookie(session_name(), '', -1, '/'); // Détruit le cookie de session
+  // Redirection vers index.php
+  header("Location: index.php");
+  exit();
+}
+
 ?>
