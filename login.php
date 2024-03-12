@@ -1,7 +1,7 @@
 <?php
 include "fonctions/fonctions.php";
     session_start();
-
+  
 if (isset($_SESSION['pseudo'])){
 
     if (isset($_SESSION['mdp'])){
