@@ -4,7 +4,6 @@
     session_start();
 
     if (isset($_SESSION['pseudo'])){
-
         header("Location: index.php");
         exit();
     }
@@ -114,14 +113,10 @@
                 $submit = isset($_POST["submit"]);
 
                 if($submit){
-
                     db_add_user();
-
                     if($_POST['user_cree']==true){
-
                         $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
                         $_SESSION['pseudo']=$pseudo;
-
                         echo "<p>".$_SESSION['pseudo']."</p>";
                     }
                 }
