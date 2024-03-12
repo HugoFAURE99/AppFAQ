@@ -110,32 +110,56 @@
                 }
               }
 
-function userLogin()
-{
+function userLogin(){
 
+  //CONNEXION A LA BDD
+  $dbh = db_connect();
 
+  //RECUPERATION DES CREDENTIALS DU FORMULAIRE
+  $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
+  $mdp = isset($_POST['mdp']) ? $_POST['mdp'] : "";
 
+  $sql_login_pseudo = "select pseudo from user where pseudo =:pseudo ";
+  try {
+  $sth = $dbh->prepare($sql_login_pseudo);
+  $sth->execute(array(':pseudo' => $pseudo));
+  $resultat_login_pseudo = $sth->fetchAll(PDO::FETCH_ASSOC);
+  } 
+  catch (PDOException $ex) {
+  die("Erreur lors de la requête SQL : " . $ex->getMessage());
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-}
+  if(count($resultat_login_pseudo) >0){
     
+    $sql_login_mdp = "select mdp from user where pseudo =:pseudo";
+    try {
+    $sth = $dbh->prepare($sql_login_mdp);
+    $sth->execute(array(
+      ':pseudo' => $pseudo
+    ));
+    $resultat_login_mdp = $sth->fetch(PDO::FETCH_ASSOC);
+    } 
+    catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+    }
 
+      if($resultat_login_mdp && password_verify($mdp,$resultat_login_mdp['mdp'])){
+        //CONNEXION REUSSIE
+        $_SESSION['pseudo']=$pseudo;
+        header("location:message.php");
+      }
+
+      else {
+        echo "<p> mot de passe incorrect ! </p>";
+
+
+        echo count($resultat_login_mdp);
+      }
+
+  }
+  else{
+    
+    echo "<p> Le compte n'existe pas ! </p>";
+  }
+}
 ?>
