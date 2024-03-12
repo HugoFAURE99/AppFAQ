@@ -25,7 +25,7 @@
 
             <br>
             <div class="b_modif">
-                <a href="accueil.php"><span>Valider</span></a>
+                <a href="index.php"><span>Valider</span></a>
             </div>
             <br>
             <div class="b_modif">
