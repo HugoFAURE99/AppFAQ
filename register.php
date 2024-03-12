@@ -1,5 +1,13 @@
 <?php
     include "fonctions/fonctions.php";
+
+    session_start();
+
+    if (isset($_SESSION['pseudo'])){
+
+        header("Location: accueil.php");
+        exit();
+    }
 ?>
 
 
@@ -89,6 +97,7 @@
                                 }
 
                                 echo '<option value="'.($i).'" selected="selected">Choisir une ligue...</option>';
+                                $_POST['i_value']=$i;
                             ?>
 
                         </select>
@@ -107,6 +116,14 @@
                 if($submit){
 
                     db_add_user();
+
+                    if($_POST['user_cree']==true){
+
+                        $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
+                        $_SESSION['pseudo']=$pseudo;
+
+                        echo "<p>".$_SESSION['pseudo']."</p>";
+                    }
                 }
             ?>
         </div>
