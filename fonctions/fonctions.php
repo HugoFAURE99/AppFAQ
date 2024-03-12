@@ -146,6 +146,7 @@ function userLogin(){
       if($resultat_login_mdp && password_verify($mdp,$resultat_login_mdp['mdp'])){
         //CONNEXION REUSSIE
         $_SESSION['pseudo']=$pseudo;
+        $_SESSION['mdp']=$mdp;
         header("location:message.php");
       }
 

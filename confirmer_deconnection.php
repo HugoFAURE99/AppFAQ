@@ -27,9 +27,9 @@ session_start();
                 <h1>Êtes-vous sûr ?</h1>
             </div>
 
-
             <br>
-            <div class="b_modif">
+
+            <div>
                 <form action="" method="post">
                     <button type="submit" name="valider"><span>Valider</span></button>
                 </form>

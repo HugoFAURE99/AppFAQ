@@ -2,6 +2,19 @@
 <html lang="fr">
 <!--c samsam je bosse sur ca-->
 
+<?php 
+
+include ('fonctions/fonctions.php');
+
+session_start();
+
+echo '<p>USER: '.$_SESSION['pseudo'].'</p>';
+echo '<p>mdp: '.$_SESSION['mdp'].'</p>';
+?>
+
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
