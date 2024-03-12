@@ -5,7 +5,7 @@
 
     if (isset($_SESSION['pseudo'])){
 
-        header("Location: accueil.php");
+        header("Location: index.php");
         exit();
     }
 ?>
