@@ -9,7 +9,7 @@ body {
     padding: 0;
     box-sizing: border-box;
 
-
+    height: 100%;
 }
 
 header {
@@ -742,8 +742,8 @@ footer {
     background-color: rgba(232, 207, 181, 0.823);
     padding: 10px;
     text-align: center;
-    position: relative;
-    bottom: 1;
+    position: fixed; /* Changer de relative à fixed pour qu'il sois en bas de page*/
+    bottom: 0;
     width: 100%;
 }
 

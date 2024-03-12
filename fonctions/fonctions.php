@@ -138,13 +138,12 @@ function userLogin()
 }
 
 // FONCTION DE DECONNEXION 
-function deconnexion(){
+function deconnexion() {
 
-  session_start();
   session_unset(); // Détruit toutes les variables de session
   session_destroy(); // Détruit la session (mais pas le cookie)
-  setcookie(session_name(),'',-1,'/'); // Détruit le cookie de session
+  setcookie(session_name(), '', -1, '/'); // Détruit le cookie de session
+  // Redirection vers index.php
   header("Location: index.php");
   exit();
-
 }
