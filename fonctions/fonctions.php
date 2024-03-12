@@ -99,7 +99,7 @@
                     die("Erreur lors de la requête SQL : " . $ex->getMessage());
                     }
 
-                    $_POST['user_cree']=true;
+                    $_GET['user_cree']=true;
 
                     echo "<p class='message_validation'>Compte créé avec succés !</p>";
                     echo "<p class='message_validation'>Redirection vers login dans 5 sec !</p>";
