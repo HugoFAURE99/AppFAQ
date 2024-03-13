@@ -238,3 +238,6 @@ function liste_messages_ligue()
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
   }
 }
+
+
+
