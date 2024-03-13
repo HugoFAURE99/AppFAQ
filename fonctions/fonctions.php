@@ -234,3 +234,6 @@ WHERE faq.id_ligue = :id_ligue;";
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
   }
 }
+
+
+
