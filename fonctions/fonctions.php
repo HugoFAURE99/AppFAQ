@@ -212,12 +212,13 @@ function liste_messages_ligue()
   //CONNEXION A LA BDD
   $dbh = db_connect();
   $id_ligue = $_SESSION['id_ligue'];
-  $sql_affichage_Q_R = 
-"SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
-FROM faq
-INNER JOIN user AS user_question ON faq.id_user_question = user_question.id_user
-INNER JOIN user AS user_reponse ON faq.id_user_reponse = user_reponse.id_user
-WHERE faq.id_ligue = :id_ligue;";
+
+  $sql_affichage_Q_R = "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
+                        FROM faq
+                        INNER JOIN user AS user_question ON faq.id_user_question = user_question.id_user
+                        INNER JOIN user AS user_reponse ON faq.id_user_reponse = user_reponse.id_user
+                        WHERE faq.id_ligue = :id_ligue;";
+                        
   try {
     $sth = $dbh->prepare($sql_affichage_Q_R);
     $sth->execute(array(':id_ligue' => $id_ligue));
