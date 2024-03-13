@@ -5,14 +5,12 @@ include "fonctions/fonctions.php";
 if (isset($_SESSION['pseudo'])){
 
     if (isset($_SESSION['mdp'])){
-
+        //si l'utilisateur est connecté (session pseudo et mdp actives)
         header('Location: message.php');
     }
-
     else{
-
+        //hugo fo que tu gères ca 
         echo "<p> Veuillez saisir vos identifiants !";
-        
     }
 }
 ?>
