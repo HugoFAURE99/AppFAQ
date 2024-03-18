@@ -157,6 +157,7 @@ function userLogin()
       die("Erreur lors de la requête SQL : " . $ex->getMessage());
     }
     $id_ligue = $resultat_id_ligue['id_ligue'];
+
     $sql_lib_ligue = "select lib_ligue from ligue where id_ligue =:id_ligue";
     try {
       $sth = $dbh->prepare($sql_lib_ligue);
@@ -168,6 +169,16 @@ function userLogin()
     $lib_ligue = $resultat_lib_ligue['lib_ligue'];
 
 
+    $sql_id_user = "select id_user from user where pseudo =:pseudo";
+    try {
+      $sth = $dbh->prepare($sql_id_user);
+      $sth->execute(array(':pseudo' => $pseudo));
+      $resultat_id_user = $sth->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $ex) {
+      die("Erreur lors de la requête SQL : " . $ex->getMessage());
+    }
+    $id_user = $resultat_id_user['id_user'];
+
 
 
 
@@ -178,6 +189,7 @@ function userLogin()
       $_SESSION['mdp'] = $mdp;
       $_SESSION['id_ligue'] = $id_ligue;
       $_SESSION['lib_ligue'] = $lib_ligue;
+      $_SESSION['id_user'] = $id_user;
 
       header("location:message.php");
     } else {
@@ -213,12 +225,14 @@ function liste_messages_ligue()
   $dbh = db_connect();
   $id_ligue = $_SESSION['id_ligue'];
 
-  $sql_affichage_Q_R = "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
-                        FROM faq
-                        INNER JOIN user AS user_question ON faq.id_user_question = user_question.id_user
-                        INNER JOIN user AS user_reponse ON faq.id_user_reponse = user_reponse.id_user
-                        WHERE faq.id_ligue = :id_ligue;";
-                        
+  $sql_affichage_Q_R =
+    "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
+  FROM faq, user AS user_question, user AS user_reponse
+  WHERE faq.id_user_question = user_question.id_user
+  AND faq.id_user_reponse = user_reponse.id_user
+  AND faq.id_ligue = :id_ligue
+  ORDER BY faq.dat_question DESC;";
+
   try {
     $sth = $dbh->prepare($sql_affichage_Q_R);
     $sth->execute(array(':id_ligue' => $id_ligue));
@@ -236,5 +250,27 @@ function liste_messages_ligue()
   }
 }
 
+function ajouter_message()
+{
+  $id_user = $_SESSION['id_user']; //Je récup les id user et id ligue dans login
+  $id_ligue = $_SESSION['id_ligue'];
+  $question = isset($_POST['question']) ? $_POST['question'] : '';
 
+  $dbh = db_connect();
+  $sql = "INSERT INTO faq (question, reponse, dat_question, id_user_question, id_user_reponse, id_ligue) 
+            VALUES (:question, 'Pas de réponse !', NOW(), :id_user, 999, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
 
+  $params = array(
+    ":question" => $question,
+    ":id_user" => $id_user,
+    ":id_ligue" => $id_ligue
+  );
+
+  try {
+    $sth = $dbh->prepare($sql);
+    $sth->execute($params);
+    echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
+  } catch (PDOException $e) {
+    echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
+  }
+}

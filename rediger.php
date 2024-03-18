@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+include('fonctions/fonctions.php');
+session_start();
+
+if (isset($_POST['submit'])) {
+    ajouter_message();
+}
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -26,32 +34,20 @@
             </div>
 
             <div class="boites_modif">
-                <label for="zoneTexte"></label><br>
-                <textarea id="zoneTexte" name="zoneTexte" rows="4"
-                    cols="50">Écrivez votre message ici !</textarea><br>
-                <br>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
+                    <p><input type="submit" name="submit" value="Envoyer" /></p>
+                </form>
+
             </div>
-
-                <div class="b_modif">
-                    <a href="message.php"><span>Valider</span></a>
-                </div>
-
-                <br>
-                <div class="b_modif">
-                    <a href="message.php"><span>Revenir en arrière</span></a>
-                </div>
-    
-            
-
-
-
-
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br>
-
-    <footer>
-        <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
-    </footer>
+            <br>
+            <div class="b_modif">
+                <a href="message.php"><span>Revenir en arrière</span></a>
+            </div>
+        </div>
+        <footer>
+            <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
+        </footer>
 </body>
 
 </html>

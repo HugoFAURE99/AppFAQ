@@ -2,7 +2,7 @@
 include "fonctions/fonctions.php";
     session_start();
   
-if (isset($_SESSION['pseudo'])){
+/*if (isset($_SESSION['pseudo'])){
 
     if (isset($_SESSION['mdp'])){
         //si l'utilisateur est connecté (session pseudo et mdp actives)
@@ -13,6 +13,7 @@ if (isset($_SESSION['pseudo'])){
         echo "<p> Veuillez saisir vos identifiants !";
     }
 }
+*/
 ?>
 
 

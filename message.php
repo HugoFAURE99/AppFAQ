@@ -3,15 +3,10 @@
 <!--c samsam je bosse sur ca-->
 
 <?php
-
 include('fonctions/fonctions.php');
 session_start();
 liste_messages_ligue(); 
-
 ?>
-
-
-
 
 <head>
     <meta charset="UTF-8">
@@ -21,8 +16,6 @@ liste_messages_ligue();
 </head>
 
 <body>
-    
-
     <header>
         <div class="titre">
             <h1>AppFAQ</h1>
