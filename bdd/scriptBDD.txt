@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 13 mars 2024 à 13:38
+-- Généré le : lun. 18 mars 2024 à 20:46
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -22,6 +22,42 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `appfaq` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `appfaq`;
+
+DELIMITER $$
+--
+-- Fonctions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `generate_random_french_firstname` () RETURNS VARCHAR(50) CHARSET utf8 COLLATE utf8_general_ci  BEGIN
+    DECLARE firstname VARCHAR(50);
+    DECLARE done INT DEFAULT 0;
+    REPEAT
+        SET firstname = (
+            SELECT DISTINCT pseudo
+            FROM (
+                SELECT 'Jean' AS pseudo UNION ALL SELECT 'Pierre' UNION ALL SELECT 'Paul' UNION ALL SELECT 'Jacques' UNION ALL SELECT 'François' UNION ALL 
+                SELECT 'Michel' UNION ALL SELECT 'Louis' UNION ALL SELECT 'Henri' UNION ALL SELECT 'Philippe' UNION ALL SELECT 'Robert'
+            ) AS existing_pseudos
+            ORDER BY RAND() LIMIT 1
+        );
+        SET done = (SELECT COUNT(*) FROM user WHERE pseudo = firstname);
+    UNTIL done = 0 END REPEAT;
+    RETURN firstname;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `generate_random_password` () RETURNS VARCHAR(255) CHARSET utf8 COLLATE utf8_general_ci  BEGIN
+    DECLARE characters VARCHAR(62) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    DECLARE random_string VARCHAR(255) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    
+    WHILE i < 12 DO
+        SET random_string = CONCAT(random_string, SUBSTRING(characters, FLOOR(1 + RAND() * 62), 1));
+        SET i = i + 1;
+    END WHILE;
+    
+    RETURN random_string;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -45,16 +81,49 @@ CREATE TABLE `faq` (
 --
 
 INSERT INTO `faq` (`id_faq`, `question`, `reponse`, `dat_question`, `dat_reponse`, `id_user_question`, `id_user_reponse`, `id_ligue`) VALUES
-(4119, 'Bonjour, quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2022-03-12 10:00:00', '2022-03-12 11:00:00', 329, 330, 0),
-(4120, 'Salut, où puis-je acheter des billets pour le match de football ?', 'Vous pouvez acheter des billets au guichet du stade.', '2022-03-12 11:30:00', '2022-03-12 12:00:00', 330, 329, 0),
-(4121, 'Bonjour, quelle est la taille du terrain de football ?', 'La taille réglementaire du terrain est de 100 mètres sur 60 mètres.', '2022-03-12 12:30:00', '2022-03-12 13:00:00', 331, 332, 0),
-(4122, 'Salut, est-ce que les matchs de football sont télévisés ?', 'Oui, les matchs sont diffusés sur une chaîne locale.', '2022-03-12 13:30:00', '2022-03-12 14:00:00', 332, 331, 0),
-(4123, 'Bonjour, y a-t-il des cours de football pour les enfants ?', 'Oui, des cours de football pour les enfants ont lieu les mercredis après-midi.', '2022-03-12 14:30:00', '2022-03-12 15:00:00', 333, 334, 0),
-(4124, 'Salut, où puis-je trouver les résultats des matchs de football ?', 'Les résultats sont affichés sur le site web de la ligue de football.', '2022-03-12 15:30:00', '2022-03-12 16:00:00', 334, 333, 0),
-(4125, 'Bonjour, comment puis-je rejoindre une équipe de football ?', 'Vous pouvez contacter le responsable de l\'équipe pour plus d\'informations.', '2022-03-12 16:30:00', '2022-03-12 17:00:00', 335, 336, 0),
-(4126, 'Salut, quels sont les horaires d\'entraînement pour l\'équipe de football ?', 'Les horaires d\'entraînement varient en fonction de l\'équipe.', '2022-03-12 17:30:00', '2022-03-12 18:00:00', 336, 335, 0),
-(4127, 'Bonjour, y a-t-il des tournois de football prévus ce mois-ci ?', 'Oui, un tournoi de football est prévu le week-end prochain.', '2022-03-12 18:30:00', '2022-03-12 19:00:00', 337, 338, 0),
-(4128, 'Salut, est-ce que les matchs de football sont ouverts au public ?', 'Oui, les matchs de football sont ouverts à tous les supporters.', '2022-03-12 19:30:00', '2022-03-12 20:00:00', 338, 337, 0);
+(1, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-13 20:01:19', '2024-02-19 20:01:19', 30, 22, 0),
+(2, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-02-20 20:01:19', '2024-03-02 20:01:19', 30, 34, 0),
+(3, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-02-29 20:01:19', '2024-03-18 20:01:19', 19, 19, 0),
+(4, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-07 20:01:19', '2024-02-22 20:01:19', 38, 12, 0),
+(5, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-02-28 20:01:19', '2024-03-12 20:01:19', 3, 14, 0),
+(6, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-02 20:01:19', '2024-02-28 20:01:19', 30, 38, 0),
+(7, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-02-21 20:01:19', '2024-03-13 20:01:19', 38, 14, 0),
+(8, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-11 20:01:19', '2024-02-19 20:01:19', 30, 19, 0),
+(9, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-14 20:01:19', '2024-03-04 20:01:19', 19, 14, 0),
+(10, 'Quand est-ce que le match de football commence ?', 'Le match commence à 15h.', '2024-03-18 20:01:19', '2024-02-23 20:01:19', 3, 12, 0),
+(11, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-25 20:01:19', '2024-02-29 20:01:19', 40, 40, 1),
+(12, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-25 20:01:19', '2024-02-28 20:01:19', 27, 32, 1),
+(13, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-03-07 20:01:19', '2024-02-23 20:01:19', 15, 27, 1),
+(14, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-03-11 20:01:19', '2024-03-15 20:01:19', 27, 36, 1),
+(15, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-27 20:01:19', '2024-03-09 20:01:19', 1, 24, 1),
+(16, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-28 20:01:19', '2024-03-18 20:01:19', 1, 8, 1),
+(17, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-03-11 20:01:19', '2024-03-15 20:01:19', 15, 15, 1),
+(18, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-03-18 20:01:19', '2024-02-19 20:01:19', 11, 40, 1),
+(19, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-26 20:01:19', '2024-03-06 20:01:19', 8, 11, 1),
+(20, 'Quand est-ce que le match de basket a lieu ?', 'Le match est prévu pour demain soir à 20h.', '2024-02-28 20:01:19', '2024-02-21 20:01:19', 11, 27, 1),
+(21, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-03-11 20:01:19', '2024-03-10 20:01:19', 39, 13, 2),
+(22, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-02-19 20:01:19', '2024-02-28 20:01:19', 28, 39, 2),
+(23, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-02-28 20:01:19', '2024-03-14 20:01:19', 35, 35, 2),
+(24, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-02-26 20:01:19', '2024-03-01 20:01:19', 6, 28, 2),
+(25, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-02-23 20:01:19', '2024-02-20 20:01:19', 39, 29, 2),
+(26, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-03-01 20:01:19', '2024-02-26 20:01:19', 2, 10, 2),
+(27, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-03-13 20:01:19', '2024-02-26 20:01:19', 28, 35, 2),
+(28, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-02-28 20:01:19', '2024-03-17 20:01:19', 6, 6, 2),
+(29, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-03-02 20:01:19', '2024-03-04 20:01:19', 29, 39, 2),
+(30, 'Quelle est la taille du terrain de volley ?', 'Le terrain mesure 18m x 9m.', '2024-03-16 20:01:19', '2024-03-16 20:01:19', 13, 21, 2),
+(31, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-02-24 20:01:19', '2024-02-19 20:01:19', 20, 20, 3),
+(32, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-16 20:01:19', '2024-03-07 20:01:19', 7, 4, 3),
+(33, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-15 20:01:19', '2024-03-05 20:01:19', 9, 31, 3),
+(34, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-08 20:01:19', '2024-02-29 20:01:19', 23, 20, 3),
+(35, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-10 20:01:19', '2024-03-08 20:01:19', 23, 4, 3),
+(36, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-10 20:01:19', '2024-03-10 20:01:19', 31, 31, 3),
+(37, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-07 20:01:19', '2024-02-26 20:01:19', 23, 23, 3),
+(38, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-05 20:01:19', '2024-03-18 20:01:19', 37, 9, 3),
+(39, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-16 20:01:19', '2024-03-13 20:01:19', 26, 4, 3),
+(40, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-10 20:01:19', '2024-03-14 20:01:19', 33, 33, 3),
+(68, 'coucou pupuce!', 'Pas de réponse !', '2024-03-18 20:30:05', '0000-00-00 00:00:00', 64, 999, 0),
+(70, 'Écrivez votre question ici efzgehgjgfhjdfdh!', 'Pas de réponse !', '2024-03-18 20:33:03', '0000-00-00 00:00:00', 64, 999, 0),
+(72, 'Salut ! question test !\r\ncv bro ?', 'Pas de réponse !', '2024-03-18 20:35:43', '0000-00-00 00:00:00', 1000, 999, 0);
 
 -- --------------------------------------------------------
 
@@ -98,21 +167,49 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `pseudo`, `mdp`, `mail`, `id_usertype`, `id_ligue`) VALUES
-(329, 'Pierre', '9fc64b3fd45cac7a0c2f02ac66ae53cb', 'Pierre.@nomdedomaine.fr', 0, 0),
-(330, 'Paul', '4d6506e9c18de16521b198c4f4a86259', 'Paul.@nomdedomaine.fr', 0, 0),
-(331, 'Jacques', 'c495c83adaaab6531622d3f61e5dfd12', 'Jacques.@nomdedomaine.fr', 0, 0),
-(332, 'Jean', '423728385fcfe340223c25986f0e44d5', 'Jean.@nomdedomaine.fr', 0, 0),
-(333, 'François', '4dd7c7bcd50c41ccbe1c73f058c1457b', 'François.@nomdedomaine.fr', 0, 0),
-(334, 'Michel', '8e21778635f2684b7d43ba1933aa9e17', 'Michel.@nomdedomaine.fr', 0, 0),
-(335, 'Louis', '28dbba0fede863177c8fcba7b8cbbb79', 'Louis.@nomdedomaine.fr', 0, 0),
-(336, 'Henri', 'b047c27577d47ea54add543b48b225b6', 'Henri.@nomdedomaine.fr', 0, 0),
-(337, 'Philippe', 'abb816d4a9a71262b89ae9c0f5ca6183', 'Philippe.@nomdedomaine.fr', 0, 0),
-(338, 'Robert', 'fdb96bb47fa5beb80548cb63440c8b1e', 'Robert.@nomdedomaine.fr', 0, 0),
-(344, 'samfoot', '$2y$10$KgIewC7IhrnaOiosf6dB/e.C68lgba.NA8NSI6BIDRZzvbozxUcAO', 'samu.kakez@gmail.com', 0, 0),
-(345, 'sambasket', '$2y$10$1n6SHPF9PQeHpsQ6CPd4ne8A9fkTDBJ4OArTRt3ZHvcWt0ji9owoW', 'sam@gmail.ff', 0, 1),
-(346, 'mathieu', '$2y$10$tWB4dCVociFR4bIu52rENeq9mq8G6LnSZ.i8FIYiuWJTnZnpnw9dS', 'mathieu@vava.d', 0, 0),
-(347, 'aa', '$2y$10$RLUO9t1SEYEQlByo5QIqbOsgjT1TsnUGfKe3NHUniELYVInHaedIG', 'aa@aa.a', 0, 1),
-(348, 'cachouxestmauvais', '$2y$10$nzvQMSSaBDh7GfLfXiMb/.f1u1DdCgXkkU9a9rFtYalhlTF2gCk1.', 'soumispassioncaca@gmail.com', 0, 1);
+(1, 'Adam27', 'ZwuJ0Ils5U8M', 'Adam15@mail.fr', 0, 1),
+(2, 'Adam29', 'hUxL4Uc4DNUZ', 'Adam88@mail.fr', 0, 2),
+(3, 'Adam48', 'NSRuHTb7QIS6', 'Adam55@mail.fr', 0, 0),
+(4, 'Adam99', 'sDD8Bqcz6CDb', 'Adam66@mail.fr', 0, 3),
+(5, 'Alexandre53', 'CRiKG2YBTwL5', 'Alexandre82@mail.fr', 0, 0),
+(6, 'Alexandre62', 'EJxlYD9DCYSi', 'Alexandre57@mail.fr', 0, 2),
+(7, 'Alexandre68', 'GJsTZ4eN61AI', 'Alexandre48@mail.fr', 0, 3),
+(8, 'Alexandre75', '8LgUxQsyeo4Z', 'Alexandre45@mail.fr', 0, 1),
+(9, 'Alice18', 'dSAaSINEKENT', 'Alice74@mail.fr', 0, 3),
+(10, 'Alice30', 'zkKAxNcsx90n', 'Alice56@mail.fr', 0, 2),
+(11, 'Alice53', 'vjRdjKFUo54W', 'Alice19@mail.fr', 0, 1),
+(12, 'Alice72', 'KT5CGmDTqfRm', 'Alice92@mail.fr', 0, 0),
+(13, 'Antoine36', 'Prw91t74QPqu', 'Antoine86@mail.fr', 0, 2),
+(14, 'Antoine82', 'Q6MtTPl48k5g', 'Antoine74@mail.fr', 0, 0),
+(15, 'Antoine85', 'g8I0Kzrj7sLj', 'Antoine96@mail.fr', 0, 1),
+(16, 'Antoine95', 'fLT0dUKQMgMX', 'Antoine10@mail.fr', 0, 3),
+(17, 'Arthur03', '6NvYaL8hO2CO', 'Arthur86@mail.fr', 0, 1),
+(18, 'Arthur09', 'C8FLFSfrhXMQ', 'Arthur60@mail.fr', 0, 2),
+(19, 'Arthur33', 'wX3h3h2fWO3F', 'Arthur86@mail.fr', 0, 0),
+(20, 'Arthur68', 'a8ZpWixBeb3z', 'Arthur40@mail.fr', 0, 3),
+(21, 'Camille07', '2lr1AJJkf8Lg', 'Camille67@mail.fr', 0, 2),
+(22, 'Camille12', '7BwBjBVDfd7N', 'Camille30@mail.fr', 0, 0),
+(23, 'Camille53', 'dPk1Vo52OMk9', 'Camille39@mail.fr', 0, 3),
+(24, 'Camille94', 'I8k7pwdn3Xvw', 'Camille74@mail.fr', 0, 1),
+(25, 'Chloé14', 'Q92AGvhICKKl', 'Chloé16@mail.fr', 0, 0),
+(26, 'Chloé22', 'kinQVXRermji', 'Chloé22@mail.fr', 0, 3),
+(27, 'Chloé48', '12Wp54T8QFCV', 'Chloé45@mail.fr', 0, 1),
+(28, 'Chloé92', 'jaHTb3zyTDjx', 'Chloé39@mail.fr', 0, 2),
+(29, 'Clément19', 'kpWhq6760zDl', 'Clément51@mail.fr', 0, 2),
+(30, 'Clément33', 'fB6xcfsmkmF7', 'Clément28@mail.fr', 0, 0),
+(31, 'Clément68', 'wSGBO5OHS9UZ', 'Clément90@mail.fr', 0, 3),
+(32, 'Clément91', 'IavVWNXhlInz', 'Clément38@mail.fr', 0, 1),
+(33, 'Éléonore02', '2veuAiAStyei', 'Éléonore45@mail.fr', 0, 3),
+(34, 'Éléonore72', 'pgXNZlDZTjJA', 'Éléonore40@mail.fr', 0, 0),
+(35, 'Éléonore77', 'PclWwFzGyz1f', 'Éléonore88@mail.fr', 0, 2),
+(36, 'Éléonore93', 'Vd6I9qw92CMS', 'Éléonore72@mail.fr', 0, 1),
+(37, 'Emma33', 'l7pu4Knt2DVz', 'Emma71@mail.fr', 0, 3),
+(38, 'Emma64', 'qzpdDoT7Li13', 'Emma93@mail.fr', 0, 0),
+(39, 'Emma91', 'EQ7V5w93F0Se', 'Emma20@mail.fr', 0, 2),
+(40, 'Emma92', 'Kj9HR2s1BLQO', 'Emma15@mail.fr', 0, 1),
+(64, 'a', '$2y$10$xf.7DY7vdDoEXR5.d3HzSOpNJZjromjSewZxpChgICc4/46bGOKDK', 'a@a.a', 0, 0),
+(999, 'admin', 'motdepasse', 'admin@example.com', 0, 0),
+(1000, 'SamuelKakez', '$2y$10$pVu4YNkMb6h2wV/WLTspEep7SsuloptYOxsh90LSiyl4Is4freofa', 'samu.kakez@gmail.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -176,13 +273,13 @@ ALTER TABLE `usertype`
 -- AUTO_INCREMENT pour la table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id_faq` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4129;
+  MODIFY `id_faq` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+  MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
 -- Contraintes pour les tables déchargées
