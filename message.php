@@ -56,31 +56,43 @@ try {
     <div class="page_accueil">
     <table>
 
-        <th>pseudo_question</th>
-        <th>texte_question</th>
-        <th>pseudo_reponse</th>
-        <th>texte_reponse</th>
+        <th>Utilisateur(s)</th>
+        <th>Question(s)</th>
+        <th>Admin(s)</th>
+        <th>Réponse(s)</th>
+        <!--ajouter conditions admin ou non -->
+        <?php
+            if($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2 ){
 
+           echo '<th>Fonction(s)</th>';
+
+            } 
+        ?>
         <?php
             if (count($rows)>0) {
                 
                 foreach ($rows as $row)
                 {
                 echo '<tr>';
-                echo '<td>'.$row['PseudoQ'].'</td>';
+                echo '<td class="td_pseudo">'.$row['PseudoQ'].'</td>';
                 echo '<td>'.$row['question'].'</td>';
-                echo '<td>'.$row['PseudoR'].'</td>';
+                echo '<td class="td_pseudo">'.$row['PseudoR'].'</td>';
                 echo '<td>'.$row['reponse'].'</td>';
+
+                if($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2 ){
+                echo '<td><a href="modifier.php" class="boutons_tab_fonction" id="boutons_tab_fonction_1">Modifier</a> <a href="confirmer_suppression" class="boutons_tab_fonction" id="boutons_tab_fonction_2">Supprimer</a></td>';
                 echo "</tr>";
+                } 
                 }
             
             } else {
-            echo "<p>Rien à afficher</p>"; 
+            echo "<p>Rien à afficher</p>";
             }
 
         ?>
 
     </table>
+    
     </div>
 
     <br>

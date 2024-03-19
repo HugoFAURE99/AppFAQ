@@ -179,6 +179,17 @@ function userLogin()
     }
     $id_user = $resultat_id_user['id_user'];
 
+/* TEST RECUP ID_USERTYPE*/
+    $sql_id_usertype = "select user.id_usertype from user where pseudo =:pseudo";
+    try {
+      $sth = $dbh->prepare($sql_id_usertype);
+      $sth->execute(array(':pseudo' => $pseudo));
+      $resultat_id_usertype = $sth->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $ex) {
+      die("Erreur lors de la requête SQL : " . $ex->getMessage());
+    }
+    $id_usertype = $resultat_id_usertype['id_usertype'];
+
 
 
 
@@ -190,6 +201,7 @@ function userLogin()
       $_SESSION['id_ligue'] = $id_ligue;
       $_SESSION['lib_ligue'] = $lib_ligue;
       $_SESSION['id_user'] = $id_user;
+      $_SESSION['id_usertype'] = $id_usertype;
 
       header("location:message.php");
     } else {

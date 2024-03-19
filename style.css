@@ -10,6 +10,7 @@ body {
     box-sizing: border-box;
 
     height: 100%;
+    
 }
 
 header {
@@ -791,9 +792,9 @@ footer {
     background-color: rgba(232, 207, 181, 0.823);
     padding: 10px;
     text-align: center;
-    position: fixed; /* Changer de relative à fixed pour qu'il sois en bas de page*/
+
     bottom: 0;
-    width: 100%;
+    
 }
 
 #choix_ligue {
@@ -824,4 +825,81 @@ footer {
     font-size: 100%;
 
 
+}
+
+
+/* Styles pour les tableaux */
+table {
+    width: 80%;
+    height: 100%;
+    border-collapse: collapse;
+    border: 5px solid rgb(244, 222, 194); /* Couleur du bord */
+    border-radius: 8px;
+
+    font-family: New Century Schoolbook, TeX Gyre Schola, sans-serif;
+
+    backdrop-filter: blur(20px);
+    font-size: 115%; 
+    text-align: center;
+}
+  
+  /* Styles pour les cellules d'en-tête */
+  th {
+
+    background-color: #b57c7c; /* Couleur de fond pour les en-têtes */
+    color: white; /* Couleur du texte pour les en-têtes */
+    padding: 8px; /* Espacement intérieur */
+    border: 3px solid #9a5e5e; /* Bordure des en-têtes */
+  }
+  
+  /* Styles pour les cellules de données */
+  td {
+     color: rgb(0, 0, 0);
+  
+    padding: 25px; /* Espacement intérieur */
+    border: 1px solid #9a5e5e; /* Bordure des cellules de données */
+  }
+
+  .td_pseudo{
+
+    font-style: italic;
+    text-decoration:underline dotted;
+    color: antiquewhite;
+    
+    
+  }
+  
+  /* Style pour les lignes impaires */
+  tr:nth-child(odd) {
+    background-color: rgba(211, 164, 175, 0.7); /* Couleur de fond pour les lignes impaires */
+  }
+
+  tr:nth-child(even) {
+    background-color: rgba(232, 207, 181, 0.7);
+  }
+
+
+  .boutons_tab_fonction{
+
+    border-style: solid;
+    border-color: antiquewhite;
+    border-width: 3px;
+    border-radius: 8px;
+    background-color: antiquewhite;
+
+    transition: 0.5s;
+  }
+
+  #boutons_tab_fonction_2:hover{
+
+        color: black;
+        background-color: rgb(234, 11, 8);
+        border-color: rgb(217, 33, 33);
+  }
+
+  #boutons_tab_fonction_1:hover{
+
+    color: black;
+    background-color: rgb(255, 143, 44);
+    border-color: rgb(255, 143, 44);
 }
