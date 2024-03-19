@@ -80,7 +80,7 @@ try {
                 echo '<td>'.$row['reponse'].'</td>';
 
                 if($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2 ){
-                echo '<td><a href="modifier.php" class="boutons_tab_fonction" id="boutons_tab_fonction_1">Modifier</a> <a href="confirmer_suppression" class="boutons_tab_fonction" id="boutons_tab_fonction_2">Supprimer</a></td>';
+                echo '<td><a href="modifier.php" class="boutons_tab_fonction" id="boutons_tab_fonction_1">Modifier</a> <a href="confirmer_suppression.php" class="boutons_tab_fonction" id="boutons_tab_fonction_2">Supprimer</a></td>';
                 echo "</tr>";
                 } 
                 }

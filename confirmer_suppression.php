@@ -30,7 +30,7 @@
             </div>
             <br>
             <div class="b_modif">
-                <a href="modifier.php"><span>Annuler</span></a>
+                <a href="message.php"><span>Annuler</span></a>
             </div>
             <br>
 
