@@ -121,9 +121,9 @@ INSERT INTO `faq` (`id_faq`, `question`, `reponse`, `dat_question`, `dat_reponse
 (38, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-05 20:01:19', '2024-03-18 20:01:19', 37, 9, 3),
 (39, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-16 20:01:19', '2024-03-13 20:01:19', 26, 4, 3),
 (40, 'À quelle heure commence le match de handball ?', 'Le match commence à 18h30.', '2024-03-10 20:01:19', '2024-03-14 20:01:19', 33, 33, 3),
-(68, 'coucou pupuce!', 'Pas de réponse !', '2024-03-18 20:30:05', '0000-00-00 00:00:00', 64, 999, 0),
-(70, 'Écrivez votre question ici efzgehgjgfhjdfdh!', 'Pas de réponse !', '2024-03-18 20:33:03', '0000-00-00 00:00:00', 64, 999, 0),
-(72, 'Salut ! question test !\r\ncv bro ?', 'Pas de réponse !', '2024-03-18 20:35:43', '0000-00-00 00:00:00', 1000, 999, 0);
+(68, 'coucou pupuce!', NULL, '2024-03-18 20:30:05', '0000-00-00 00:00:00', 64, 999, 0),
+(70, 'Écrivez votre question ici efzgehgjgfhjdfdh!', NULL, '2024-03-18 20:33:03', '0000-00-00 00:00:00', 64, 999, 0),
+(72, 'Salut ! question test !\r\ncv bro ?', NULL, '2024-03-18 20:35:43', '0000-00-00 00:00:00', 1000, 999, 0);
 
 -- --------------------------------------------------------
 

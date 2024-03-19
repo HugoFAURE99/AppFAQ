@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="fr">
-<!--c samsam je bosse sur ca-->
+<?php 
 
-<?php
+
 include('fonctions/fonctions.php');
 session_start();
 liste_messages_ligue(); 
-?>
 
+$dbh = db_connect();
+$sql = 'select PQ.pseudo AS PseudoQ, faq.question, PR.pseudo AS PseudoR, faq.reponse
+from faq, user PQ, user PR
+where PQ.id_user = faq.id_user_question
+    AND PR.id_user = faq.id_user_reponse
+    AND faq.id_ligue = :id_ligue
+order by dat_question desc;';
+try {
+    $sth = $dbh->prepare($sql);
+    $sth->execute(array( ":id_ligue" => $_SESSION['id_ligue']));
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    die( "<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+  }
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,119 +52,35 @@ liste_messages_ligue();
             echo '<p><div class="ligue_connecte_info">Derniers messages de la <strong>' . $_SESSION['lib_ligue'] . '.</strong></div></p>';
         }
         ?>
+
     <div class="page_accueil">
-        <div class="boite_module">
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_question_0'];?> a demandé</p1>
-            </div>
+    <table>
 
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_question_0'];?></p1>
-            </div>
+        <th>pseudo_question</th>
+        <th>texte_question</th>
+        <th>pseudo_reponse</th>
+        <th>texte_reponse</th>
 
-            <div class="img_fleche">
-                <img class="img_fleche" src="Images/fleche-vers-le-bas.png" alt="fleche" />
-            </div>
+        <?php
+            if (count($rows)>0) {
+                
+                foreach ($rows as $row)
+                {
+                echo '<tr>';
+                echo '<td>'.$row['PseudoQ'].'</td>';
+                echo '<td>'.$row['question'].'</td>';
+                echo '<td>'.$row['PseudoR'].'</td>';
+                echo '<td>'.$row['reponse'].'</td>';
+                echo "</tr>";
+                }
+            
+            } else {
+            echo "<p>Rien à afficher</p>"; 
+            }
 
+        ?>
 
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_reponse_0'];?> a répondu</p1>
-            </div>
-
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_reponse_0'];?></p1>
-            </div>
-
-            <div class="boite_modifier">
-                <a href="modifier.php"><span>modifier</span></a>
-            </div>
-        </div>
-
-        <div class="boite_module">
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_question_1'];?> a demandé</p1>
-            </div>
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_question_1'];?></p1>
-            </div>
-
-            <div class="img_fleche">
-                <img class="img_fleche" src="Images/fleche-vers-le-bas.png" alt="fleche" />
-            </div>
-
-
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_reponse_1'];?> a répondu</p1>
-            </div>
-
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_reponse_1'];?></p1>
-            </div>
-
-            <div class="boite_modifier">
-                <a href="modifier.php"><span>modifier</span></a>
-            </div>
-        </div>
-        
-        
-        <div class="boite_module">
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_question_2'];?> a demandé</p1>
-            </div>
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_question_2'];?></p1>
-            </div>
-
-            <div class="img_fleche">
-                <img class="img_fleche" src="Images/fleche-vers-le-bas.png" alt="fleche" />
-            </div>
-
-
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_reponse_2'];?> a répondu</p1>
-            </div>
-
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_reponse_2'];?></p1>
-            </div>
-
-            <div class="boite_modifier">
-                <a href="modifier.php"><span>modifier</span></a>
-            </div>
-        </div>
-
-        <div class="boite_module">
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_question_3'];?> a demandé</p1>
-            </div>
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_question_3'];?></p1>
-            </div>
-
-            <div class="img_fleche">
-                <img class="img_fleche" src="Images/fleche-vers-le-bas.png" alt="fleche" />
-            </div>
-
-
-            <div class="nom_utilisateur_publication">
-                <p1><?php echo $_SESSION['pseudo_reponse_3'];?> a répondu</p1>
-            </div>
-
-
-            <div class="boite_module_mini">
-                <p1><?php echo $_SESSION['texte_reponse_3'];?></p1>
-            </div>
-
-            <div class="boite_modifier">
-                <a href="modifier.php"><span>modifier</span></a>
-            </div>
-        </div>
+    </table>
     </div>
 
     <br>
