@@ -269,8 +269,8 @@ function ajouter_message()
   $question = isset($_POST['question']) ? $_POST['question'] : '';
 
   $dbh = db_connect();
-  $sql = "INSERT INTO faq (question, reponse, dat_question, id_user_question, id_user_reponse, id_ligue) 
-            VALUES (:question, 'Pas de réponse !', NOW(), :id_user, 999, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
+  $sql = "INSERT INTO faq (question, dat_question, id_user_question, id_user_reponse, id_ligue) 
+            VALUES (:question, NOW(), :id_user, 999, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
 
   $params = array(
     ":question" => $question,
