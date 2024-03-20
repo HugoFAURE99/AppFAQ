@@ -43,9 +43,6 @@ try {
         <div class="boite_deconnecter">
             <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
         </div>
-        <div class="boite_rediger">
-            <a href="rediger.php"><span>Rédiger un message</span></a>
-        </div>
     </header>
     <?php
         if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
@@ -54,6 +51,12 @@ try {
         ?>
 
     <div class="page_accueil">
+
+        <div class="boite_rediger">
+            <a href="rediger.php">Rédiger un message</a>
+        </div>
+
+
     <table>
 
         <th>Utilisateur(s)</th>
