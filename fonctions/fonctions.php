@@ -179,7 +179,7 @@ function userLogin()
     }
     $id_user = $resultat_id_user['id_user'];
 
-/* TEST RECUP ID_USERTYPE*/
+/* RECUP ID_USERTYPE*/
     $sql_id_usertype = "select user.id_usertype from user where pseudo =:pseudo";
     try {
       $sth = $dbh->prepare($sql_id_usertype);
@@ -285,4 +285,14 @@ function ajouter_message()
   } catch (PDOException $e) {
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
+}
+
+
+
+
+function footer()
+{
+  echo '<footer>
+        <p>BTS SIO &copy;2024 APPFAQ<br>Hugo FAURE, Sylvain FACCIN, Samuel KAKEZ</p>
+        </footer>';
 }

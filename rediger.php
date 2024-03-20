@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="boites_modif">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
                     <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
                     <p><input type="submit" name="submit" value="Envoyer" /></p>
                 </form>
@@ -45,9 +45,8 @@ if (isset($_POST['submit'])) {
                 <a href="message.php"><span>Revenir en arrière</span></a>
             </div>
         </div>
-        <footer>
-            <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
-        </footer>
+
+       <?php footer(); ?>
 </body>
 
 </html>

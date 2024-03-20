@@ -53,9 +53,7 @@
 
     </div>
     <br><br><br>
-    <footer>
-        <p>BTS SIO &copy;2024 APPFAQ<br>Samuel KAKEZ, Hugo FAURE, Sylvain FACCIN</p>
-    </footer>
+    <?php footer(); ?>
 </body>
 
 </html>
