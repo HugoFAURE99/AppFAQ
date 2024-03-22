@@ -303,16 +303,6 @@ function admin_check()
   }
 }
 
-function admin_check()
-{
-
-  if ($_SESSION['id_usertype'] == 0) {
-    header("Location: message.php");
-    exit();
-  }
-}
-
-
 
 
 
