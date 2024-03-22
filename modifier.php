@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+include('fonctions/fonctions.php');
+session_start();
+
+if (isset($_POST['submit'])) {
+    modifier_message();
+}
+?>
 <html lang="fr">
 
 <head>
@@ -34,31 +42,15 @@
             </div>
 
             <div class="boites_modif">
-                <label for="zoneTexte">Question</label><br>
-                <textarea id="zoneTexte" name="zoneTexte" rows="4"
-                    cols="50">Bonjour,Quels sports puis-je pratiquer dans votre maison de ligues ? Merci</textarea><br>
-
-                <label for="zoneTexte">Réponse</label><br>
-                <textarea id="zoneTexte" name="zoneTexte" rows="4"
-                    cols="50">Notre maison de ligues propose une variété desports. (Rugby, Escrime...) Il y en a pour tout les goûts !</textarea><br>
-                    
-                </div>
-                <br>
-                <div class="b_modif">
-                    <a href="message.php"><span>Valider</span></a>
-                </div>
-                <br>
-                <div class="b_modif">
-                    <a href="confirmer_suppression.php"><span>Supprimer</span></a>
-                </div>
-                <br>
-                <div class="b_modif">
-                    <a href="message.php"><span>Revenir en arrière</span></a>
-                </div>
-    
-            </div>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
+                    <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
+                    <textarea id="question" name="reponse" rows="4" cols="50">Écrivez votre réponse ici !</textarea>
+                    <p><input type="submit" name="submit" value="Envoyer" /></p>
+                </form>
 
 
+    </div>
+    </div>
     </div>
     <br><br><br>
     <?php footer(); ?>

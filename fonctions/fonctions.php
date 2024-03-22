@@ -397,6 +397,29 @@ function supprimer_message() {
 function modifier_message() {
 
 
+  $question = isset($_POST['question']) ? $_POST['question'] : '';
+  $reponse = isset($_POST['reponse']) ? $_POST['reponse'] : '';
+  $id_faq = $_GET['id_faq'];
+
+  $dbh = db_connect();
+  $sql_modifier = "UPDATE faq
+          set question = :question, 
+          reponse = :reponse
+          where id_faq = :id;";
+
+  $params = array(
+    ":question" => $question,
+    ":reponse" => $reponse,
+    ":id_faq" => $id_faq
+  );
+
+  try {
+    $sth = $dbh->prepare($sql_modifier);
+    $sth->execute($params);
+    echo "Question modifiée."; //juste pour le débug, on peut l'enlever à la fin
+  } catch (PDOException $e) {
+    echo "Erreur lors de la modification de la question: " . $e->getMessage();
+  }
 
 
 
