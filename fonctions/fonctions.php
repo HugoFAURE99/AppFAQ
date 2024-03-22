@@ -1,4 +1,7 @@
 <?php
+
+
+
 //FONCTION DE CONNECTION A LA BDD APPFAQ
 function db_connect()
 {
@@ -306,92 +309,27 @@ function supprimer_message() {
 
   $dbh = db_connect();
 
+  $id_faq = $_GET['id_faq'];
+  $submit = isset($_POST['submit_suppr']);
+
+  $sql="DELETE FROM faq WHERE id_faq=:id_faq;";
+
+  $params = array(
+    ":id_faq" => $id_faq );
+
+  if($submit){
+    try {
+      $sth = $dbh->prepare($sql);
+      $sth->execute($params);
+      echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
+    } catch (PDOException $e) {
+      echo "Erreur lors de la suppression de la question: " . $e->getMessage();
+    }
+
+    header('Location: message.php');
+  }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function modifier_message() {

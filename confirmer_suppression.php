@@ -1,3 +1,11 @@
+<?php
+
+    include("fonctions/fonctions.php");
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -31,21 +39,26 @@
                 <h1>Êtes-vous sûr ?</h1>
             </div>
 
-
+        <form action="<?php $_SERVER["PHP_SELF"] ?>" method=POST>
             <br>
             <div class="b_modif">
-                <a href="message.php"><span>Valider</span></a>
+                <input type="submit" name="submit_suppr">
             </div>
             <br>
             <div class="b_modif">
                 <a href="message.php"><span>Annuler</span></a>
             </div>
             <br>
+        </form>
 
 
         </div>
 
+<?php 
 
+    supprimer_message();
+
+?>
 
 
     </div>
