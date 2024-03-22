@@ -22,8 +22,6 @@ include('fonctions/fonctions.php'); ?>
             <div class="entete">
                 <h1>Accueil</h1>
             </div>
-
-
             <br>
             <div class="b_modif">
                 <a href="login.php"><span>Se connecter</span></a>

@@ -42,15 +42,15 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="boites_modif">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
                     <textarea id="question" name="reponse" rows="4" cols="50">Écrivez votre réponse ici !</textarea>
                     <p><input type="submit" name="submit" value="Envoyer" /></p>
                 </form>
 
 
-    </div>
-    </div>
+            </div>
+        </div>
     </div>
     <br><br><br>
     <?php footer(); ?>
