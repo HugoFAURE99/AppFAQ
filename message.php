@@ -41,7 +41,7 @@ try {
         }
         ?>
         <div class="boite_deconnecter">
-            <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
+            <a href="confirmer_deconnection.php"><span>Déconnexion</span></a>
         </div>
     </header>
     <?php
@@ -57,7 +57,7 @@ try {
         </div>
 
 
-    <table>
+    <table class="table_message_">
 
         <th>Utilisateur(s)</th>
         <th>Question(s)</th>
