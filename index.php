@@ -35,7 +35,9 @@
         </div>
     </div>
 
-    <?php footer(); ?>
+    <footer>
+        <p>BTS SIO &copy;2024 APPFAQ<br>Hugo FAURE, Sylvain FACCIN, Samuel KAKEZ</p>
+        </footer>
 </body>
 
 </html>
