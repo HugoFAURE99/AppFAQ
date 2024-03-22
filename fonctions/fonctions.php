@@ -296,3 +296,17 @@ function footer()
         <p>BTS SIO &copy;2024 APPFAQ<br>Hugo FAURE, Sylvain FACCIN, Samuel KAKEZ</p>
         </footer>';
 }
+
+
+
+
+
+
+
+
+
+function supprimer_message() {
+
+  $dbh = db_connect();
+
+}
