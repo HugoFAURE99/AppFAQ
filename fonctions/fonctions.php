@@ -17,13 +17,10 @@ function db_connect()
 //FONCTION QUI PERMET D'AJOUTER UN USER DANS LA BDD A L'AIDE DES SAISIES DU FORM REGISTER
 function db_add_user()
 {
-
   //TRUE SI USER CREE OU RESTE FALSE SI PAS CREE
   $_GET['user_cree'] = FALSE;
-
   //CONNECTION A LA BDD
   $dbh = db_connect();
-
   //CREATION DES VARIABLES QUI CONTIENNENT LES DONNEES SAISIES DANS LE FORM
   $id_user = "NULL";
   $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
@@ -179,7 +176,7 @@ function userLogin()
     }
     $id_user = $resultat_id_user['id_user'];
 
-/* RECUP ID_USERTYPE*/
+    /* RECUP ID_USERTYPE*/
     $sql_id_usertype = "select user.id_usertype from user where pseudo =:pseudo";
     try {
       $sth = $dbh->prepare($sql_id_usertype);
@@ -292,4 +289,26 @@ function footer()
   echo '<footer>
         <p>BTS SIO &copy;2024 APPFAQ<br>Hugo FAURE, Sylvain FACCIN, Samuel KAKEZ</p>
         </footer>';
+}
+
+function admin_check()
+{
+
+  if ($_SESSION['id_usertype'] == 0) {
+    header("Location: message.php");
+    exit();
+  }
+}
+
+
+
+
+
+
+
+
+function supprimer_message() {
+
+  $dbh = db_connect();
+
 }
