@@ -58,19 +58,20 @@ try {
 
 
     <table class="table_message_">
+        <tr>
+            <th>Utilisateur(s)</th>
+            <th>Question(s)</th>
+            <th>Admin(s)</th>
+            <th>Réponse(s)</th>
+            <!--ajouter conditions admin ou non -->
+            <?php
+                if($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2 ){
 
-        <th>Utilisateur(s)</th>
-        <th>Question(s)</th>
-        <th>Admin(s)</th>
-        <th>Réponse(s)</th>
-        <!--ajouter conditions admin ou non -->
-        <?php
-            if($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2 ){
+            echo '<th>Fonction(s)</th>';
 
-           echo '<th>Fonction(s)</th>';
-
-            } 
-        ?>
+                } 
+            ?>
+        </tr>
         <?php
             if (count($rows)>0) {
                 

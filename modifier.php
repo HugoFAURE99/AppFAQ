@@ -22,9 +22,6 @@ if (isset($_POST['submit'])) {
         <div class="titre">
             <h1>AppFAQ</h1>
         </div>
-        <div class="boite_deconnecter">
-            <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
-        </div>
         <?php
         if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
             echo '<p><div class="user_connecte_info">Connecté en tant que <strong>' . $_SESSION['pseudo'] . '</strong></div></p>';
@@ -40,15 +37,12 @@ if (isset($_POST['submit'])) {
             <div class="entete">
                 <h1>Modifier un message</h1>
             </div>
-
             <div class="boites_modif">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF'].'?id_faq='.$_GET["id_faq"]; ?>" method="post">
                     <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
                     <textarea id="question" name="reponse" rows="4" cols="50">Écrivez votre réponse ici !</textarea>
                     <p><input type="submit" name="submit" value="Envoyer" /></p>
                 </form>
-
-
             </div>
         </div>
     </div>

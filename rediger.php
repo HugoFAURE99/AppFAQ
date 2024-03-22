@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                 <a href="message.php"><span>Revenir en arrière</span></a>
             </div>
         </div>
-
+    </div>
        <?php footer(); ?>
 </body>
 

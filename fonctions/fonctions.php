@@ -221,7 +221,6 @@ function userLogin()
 // FONCTION DE DECONNEXION 
 function deconnexion()
 {
-
   session_unset(); // Détruit toutes les variables de session
   session_destroy(); // Détruit la session (mais pas le cookie)
   setcookie(session_name(), '', -1, '/'); // Détruit le cookie de session
@@ -269,8 +268,8 @@ function ajouter_message()
   $question = isset($_POST['question']) ? $_POST['question'] : '';
 
   $dbh = db_connect();
-  $sql = "INSERT INTO faq (question, dat_question, id_user_question, id_user_reponse, id_ligue) 
-            VALUES (:question, NOW(), :id_user, 999, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
+  $sql = "INSERT INTO faq (question, dat_question, id_user_question, id_ligue) 
+          VALUES (:question, NOW(), :id_user, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
 
   $params = array(
     ":question" => $question,
@@ -281,10 +280,11 @@ function ajouter_message()
   try {
     $sth = $dbh->prepare($sql);
     $sth->execute($params);
-    echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
   } catch (PDOException $e) {
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
+  header('Location: message.php');
+  
 }
 
 function footer()
@@ -296,7 +296,6 @@ function footer()
 
 function admin_check()
 {
-
   if ($_SESSION['id_usertype'] == 0) {
     header("Location: message.php");
     exit();
@@ -306,59 +305,46 @@ function admin_check()
 
 
 function supprimer_message() {
-
   $dbh = db_connect();
-
   $id_faq = $_GET['id_faq'];
   $submit = isset($_POST['submit_suppr']);
-
   $sql="DELETE FROM faq WHERE id_faq=:id_faq;";
-
   $params = array(
     ":id_faq" => $id_faq );
-
   if($submit){
     try {
       $sth = $dbh->prepare($sql);
       $sth->execute($params);
-      echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
     } catch (PDOException $e) {
       echo "Erreur lors de la suppression de la question: " . $e->getMessage();
     }
-
     header('Location: message.php');
   }
-
 }
 
 
 function modifier_message() {
 
-
+  $id_faq = $_GET['id_faq'];
   $question = isset($_POST['question']) ? $_POST['question'] : '';
   $reponse = isset($_POST['reponse']) ? $_POST['reponse'] : '';
-  $id_faq = $_GET['id_faq'];
-
   $dbh = db_connect();
   $sql_modifier = "UPDATE faq
           set question = :question, 
           reponse = :reponse
-          where id_faq = :id;";
+          where id_faq = :id_faq;";
 
   $params = array(
     ":question" => $question,
     ":reponse" => $reponse,
     ":id_faq" => $id_faq
   );
-
   try {
     $sth = $dbh->prepare($sql_modifier);
     $sth->execute($params);
-    echo "Question modifiée."; //juste pour le débug, on peut l'enlever à la fin
   } catch (PDOException $e) {
     echo "Erreur lors de la modification de la question: " . $e->getMessage();
   }
 
-
-
+  header("Location: message.php");
 }
