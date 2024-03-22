@@ -17,6 +17,14 @@
         <div class="boite_deconnecter">
             <a href="confirmer_deconnection.php"><span>Se déconnecter</span></a>
         </div>
+        <?php
+        if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
+            echo '<p><div class="user_connecte_info">Connecté en tant que <strong>' . $_SESSION['pseudo'] . '</strong></div></p>';
+        }
+        ?>
+        <div class="boite_deconnecter">
+            <a href="confirmer_deconnection.php"><span>Déconnexion</span></a>
+        </div>
     </header>
 
     <div class="page">

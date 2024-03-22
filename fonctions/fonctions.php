@@ -287,9 +287,6 @@ function ajouter_message()
   }
 }
 
-
-
-
 function footer()
 {
   echo '<footer>
@@ -305,11 +302,6 @@ function admin_check()
     exit();
   }
 }
-
-
-
-
-
 
 
 
@@ -336,6 +328,14 @@ function supprimer_message() {
 
     header('Location: message.php');
   }
-  
+
+}
+
+
+function modifier_message() {
+
+
+
+
 
 }

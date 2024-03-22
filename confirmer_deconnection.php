@@ -19,6 +19,11 @@ session_start();
         <div class="titre">
             <h1>AppFAQ</h1>
         </div>
+        <?php
+        if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
+            echo '<p><div class="user_connecte_info">Connecté en tant que <strong>' . $_SESSION['pseudo'] . '</strong></div></p>';
+        }
+        ?>
     </header>
 
     <div class="page">
