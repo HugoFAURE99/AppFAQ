@@ -284,9 +284,6 @@ function ajouter_message()
   }
 }
 
-
-
-
 function footer()
 {
   echo '<footer>

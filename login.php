@@ -54,7 +54,7 @@ include "fonctions/fonctions.php";
                         <span>Mot de passe</span>
                     </div>
 
-                    <div class="boite_submit">
+                    <div>
                         <a href="message.php"><input type="submit" name="submit" required="required" id="envoyer"></a>
                     </div>
                 </div>
