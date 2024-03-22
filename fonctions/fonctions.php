@@ -1,7 +1,4 @@
 <?php
-
-
-
 //FONCTION DE CONNECTION A LA BDD APPFAQ
 function db_connect()
 {
@@ -106,9 +103,6 @@ function db_add_user()
 
     echo "<p class='message_validation'>Compte créé avec succés !</p>";
     echo "<p class='message_validation'>Redirection vers login dans 5 sec !</p>";
-
-
-
     echo '<meta http-equiv="refresh" content="5;URL=\'http://localhost/projets/AppFAQ/AppFAQ/login.php\'">'; // REDIRECTION APRES 5 SECONDES VERS LOGIN.PHP (ATTENTION L'URL MARCHE SUR MON PC MAIS PAS AILLEURS JE PENSE)
   }
 }
@@ -206,12 +200,9 @@ function userLogin()
       header("location:message.php");
     } else {
       echo "<p> mot de passe incorrect ! </p>";
-
-
       echo count($resultat_login_mdp);
     }
   } else {
-
     echo "<p> Le compte n'existe pas ! </p>";
   }
 }
