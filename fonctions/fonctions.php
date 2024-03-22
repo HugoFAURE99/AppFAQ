@@ -302,3 +302,26 @@ function admin_check()
     exit();
   }
 }
+
+function admin_check()
+{
+
+  if ($_SESSION['id_usertype'] == 0) {
+    header("Location: message.php");
+    exit();
+  }
+}
+
+
+
+
+
+
+
+
+
+function supprimer_message() {
+
+  $dbh = db_connect();
+
+}
