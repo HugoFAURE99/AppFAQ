@@ -3,7 +3,6 @@
 <?php
 include('fonctions/fonctions.php');
 session_start();
-
 if (isset($_POST['submit'])) {
     ajouter_message();
 }
@@ -37,21 +36,21 @@ if (isset($_POST['submit'])) {
             <div class="entete">
                 <h1>Rédiger un message</h1>
             </div>
-
             <div class="boites_modif">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
-                    <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <textarea id="question" name="question" rows="4" cols="50" placeholder="Écrivez votre question ici !"></textarea>
                     <p><input type="submit" name="submit" value="Envoyer" /></p>
                 </form>
-
             </div>
-            <br>
             <div class="b_modif">
-                <a href="message.php"><span>Revenir en arrière</span></a>
-            </div>
+            <a href="message.php"><span>Revenir en arrière</span></a>
         </div>
+        </div>
+        <br>
+
     </div>
-       <?php footer(); ?>
+    </div>
+    <?php footer(); ?>
 </body>
 
 </html>

@@ -207,8 +207,6 @@ function userLogin()
   }
 }
 
-
-
 // FONCTION DE DECONNEXION 
 function deconnexion()
 {
@@ -338,4 +336,27 @@ function modifier_message() {
   }
 
   header("Location: message.php");
+}
+
+function affichage_modification_messages(){
+  $dbh = db_connect();
+  $id_faq = $_GET['id_faq'];
+
+  $sql_affichage_modif_Q_R =
+    "SELECT question, reponse
+    FROM faq
+    WHERE id_faq=:id_faq";
+  try {
+    $sth = $dbh->prepare($sql_affichage_modif_Q_R);
+    $sth->execute(array(':id_faq' => $id_faq));
+    $resultats = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($resultats as $resultat) {
+      $_SESSION['question_modifier'] = $resultat['question'];
+      $_SESSION['reponse_modifier'] = $resultat['reponse'];
+    }
+  } catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+  }
+
 }

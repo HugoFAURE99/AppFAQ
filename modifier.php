@@ -2,7 +2,7 @@
 <?php
 include('fonctions/fonctions.php');
 session_start();
-
+affichage_modification_messages();
 if (isset($_POST['submit'])) {
     modifier_message();
 }
@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="boites_modif">
                 <form action="<?php echo $_SERVER['PHP_SELF'].'?id_faq='.$_GET["id_faq"]; ?>" method="post">
-                    <textarea id="question" name="question" rows="4" cols="50">Écrivez votre question ici !</textarea>
-                    <textarea id="question" name="reponse" rows="4" cols="50">Écrivez votre réponse ici !</textarea>
+                    <textarea id="question" name="question" rows="4" cols="50"><?php echo $_SESSION['question_modifier']; ?></textarea>
+                    <textarea id="question" name="reponse" rows="4" cols="50"><?php echo $_SESSION['reponse_modifier']; ?></textarea>
                     <p><input type="submit" name="submit" value="Envoyer" /></p>
                 </form>
             </div>
