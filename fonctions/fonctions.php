@@ -224,18 +224,32 @@ function liste_messages_ligue()
   //CONNEXION A LA BDD
   $dbh = db_connect();
   $id_ligue = $_SESSION['id_ligue'];
+  $id_usertype = $_SESSION['id_usertype'];
+  $user_normal_admin = ($id_usertype == 0 || $id_usertype == 1); //bool
 
-  $sql_affichage_Q_R =
-    "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
-  FROM faq, user AS user_question, user AS user_reponse
-  WHERE faq.id_user_question = user_question.id_user
-  AND faq.id_user_reponse = user_reponse.id_user
-  AND faq.id_ligue = :id_ligue
-  ORDER BY faq.dat_question DESC;";
+  if ($user_normal_admin) {
+    $sql_affichage_Q_R =
+      "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
+       FROM faq, user AS user_question, user AS user_reponse
+       WHERE faq.id_user_question = user_question.id_user
+       AND faq.id_user_reponse = user_reponse.id_user
+       AND faq.id_ligue = :id_ligue
+       ORDER BY faq.dat_question DESC;";
+  } else {
+    $sql_affichage_Q_R =
+      "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
+       FROM faq, user AS user_question, user AS user_reponse
+       WHERE faq.id_user_question = user_question.id_user
+       AND faq.id_user_reponse = user_reponse.id_user
+       ORDER BY faq.id_ligue DESC;";
+  }
+
 
   try {
     $sth = $dbh->prepare($sql_affichage_Q_R);
-    $sth->execute(array(':id_ligue' => $id_ligue));
+    if ($user_normal_admin) {
+      $sth->execute(array(':id_ligue' => $id_ligue));
+    }
     $resultats = $sth->fetchAll(PDO::FETCH_ASSOC);
 
     //PERMET DE NE PAS ECRASER LES DONNEES AVEC DES INDEXES
@@ -273,7 +287,6 @@ function ajouter_message()
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
   header('Location: message.php');
-  
 }
 
 function footer()
@@ -293,14 +306,16 @@ function admin_check()
 
 
 
-function supprimer_message() {
+function supprimer_message()
+{
   $dbh = db_connect();
   $id_faq = $_GET['id_faq'];
   $submit = isset($_POST['submit_suppr']);
-  $sql="DELETE FROM faq WHERE id_faq=:id_faq;";
+  $sql = "DELETE FROM faq WHERE id_faq=:id_faq;";
   $params = array(
-    ":id_faq" => $id_faq );
-  if($submit){
+    ":id_faq" => $id_faq
+  );
+  if ($submit) {
     try {
       $sth = $dbh->prepare($sql);
       $sth->execute($params);
@@ -312,7 +327,8 @@ function supprimer_message() {
 }
 
 
-function modifier_message() {
+function modifier_message()
+{
 
   $id_faq = $_GET['id_faq'];
   $question = isset($_POST['question']) ? $_POST['question'] : '';
@@ -338,14 +354,15 @@ function modifier_message() {
   header("Location: message.php");
 }
 
-function affichage_modification_messages(){
+function affichage_modification_messages()
+{
   $dbh = db_connect();
   $id_faq = $_GET['id_faq'];
 
   $sql_affichage_modif_Q_R =
     "SELECT question, reponse
-    FROM faq
-    WHERE id_faq=:id_faq";
+     FROM faq
+     WHERE id_faq=:id_faq";
   try {
     $sth = $dbh->prepare($sql_affichage_modif_Q_R);
     $sth->execute(array(':id_faq' => $id_faq));
@@ -358,5 +375,4 @@ function affichage_modification_messages(){
   } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
   }
-
 }

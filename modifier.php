@@ -2,6 +2,7 @@
 <?php
 include('fonctions/fonctions.php');
 session_start();
+admin_check();
 affichage_modification_messages();
 if (isset($_POST['submit'])) {
     modifier_message();

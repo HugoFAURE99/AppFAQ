@@ -1,7 +1,8 @@
 <?php
-
-    include("fonctions/fonctions.php");
-
+session_start();
+include("fonctions/fonctions.php");
+admin_check();
+supprimer_message();
 ?>
 
 
@@ -39,30 +40,19 @@
                 <h1>Êtes-vous sûr ?</h1>
             </div>
 
-        <form action="<?php $_SERVER["PHP_SELF"] ?>" method=POST>
-            <br>
-            <div class="b_modif">
-                <input type="submit" name="submit_suppr">
-            </div>
-            <br>
-            <div class="b_modif">
-                <a href="message.php"><span>Annuler</span></a>
-            </div>
-            <br>
-        </form>
-
-
+            <form action="<?php $_SERVER["PHP_SELF"] ?>" method=POST>
+                <br>
+                <div class="b_modif">
+                    <input type="submit" name="submit_suppr">
+                </div>
+                <br>
+                <div class="b_modif">
+                    <a href="message.php"><span>Annuler</span></a>
+                </div>
+                <br>
+            </form>
         </div>
-
-<?php 
-
-    supprimer_message();
-
-?>
-
-
     </div>
-
     <?php footer(); ?>
 </body>
 
