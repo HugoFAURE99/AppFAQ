@@ -96,7 +96,9 @@ try {
             if (count($rows) > 0) {
                 foreach ($rows as $row) {
                     echo '<tr>';
-                    echo '<td>' . $row['lib_ligue'] . '</td>';
+                    if ($session_super_admin) {
+                        echo '<td>' . $row['lib_ligue'] . '</td>';
+                    }
                     echo '<td class="td_pseudo">' . $row['PseudoQ'] . '</td>';
                     echo '<td>' . $row['question'] . '</td>';
                     echo '<td class="td_pseudo">' . $row['PseudoR'] . '</td>';
