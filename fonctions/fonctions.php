@@ -333,6 +333,7 @@ function modifier_message()
 {
 
   $id_faq = $_GET['id_faq'];
+  $id_user = $_SESSION['id_user'];
   $question = isset($_POST['question']) ? $_POST['question'] : '';
   $reponse = isset($_POST['reponse']) ? $_POST['reponse'] : '';
   $dbh = db_connect();
@@ -340,12 +341,14 @@ function modifier_message()
           set question = :question, 
           reponse = :reponse,
           dat_question = now(),
-          dat_reponse = now()
+          dat_reponse = now(),
+          id_user_reponse = :id_user_reponse
           where id_faq = :id_faq;";
   $params = array(
     ":question" => $question,
     ":reponse" => $reponse,
-    ":id_faq" => $id_faq
+    ":id_faq" => $id_faq,
+    ":id_user_reponse" => $id_user
   );
   try {
     $sth = $dbh->prepare($sql_modifier);
