@@ -35,6 +35,8 @@ try {
         <div class="titre">
             <h1>AppFAQ</h1>
         </div>
+
+
         <?php
         if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
             echo '<p><div class="user_connecte_info">Connecté en tant que <strong>' . $_SESSION['pseudo'] . '</strong></div></p>';
@@ -44,6 +46,9 @@ try {
             <a href="confirmer_deconnection.php"><span>Déconnexion</span></a>
         </div>
     </header>
+    <?php affichage_message_statut(); ?>
+
+
     <?php
     if (isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
         echo '<p><div class="ligue_connecte_info">Derniers messages de la <strong>' . $_SESSION['lib_ligue'] . '.</strong></div></p>';
@@ -65,7 +70,7 @@ try {
                 <!--ajouter conditions admin ou non -->
                 <?php
                 if ($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2) {
-                    echo '<th>Fonction(s)</th>';
+                    echo '<th>Action(s)</th>';
                 }
                 ?>
             </tr>

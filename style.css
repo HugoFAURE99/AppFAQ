@@ -937,3 +937,17 @@ table {
     background-color: rgb(255, 143, 44);
     border-color: rgb(255, 143, 44);
 }
+
+.boite_infos{
+    position: relative; 
+    text-align: center; 
+    border: 3px solid rgba(255, 214, 230, 0.685);
+    border-radius: 5px; 
+    width: 400px; 
+    height: 65px; 
+    background-color: rgba(255, 255, 255, 0.445); 
+    margin: 0 auto; 
+    top: 50%; 
+    transform: translateY(-100%); 
+    color: rgb(255, 255, 255);
+}

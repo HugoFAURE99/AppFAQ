@@ -286,6 +286,7 @@ function ajouter_message()
   } catch (PDOException $e) {
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
+  $_SESSION['message_info'] = 'Question Ajoutée avec succès !';
   header('Location: message.php');
 }
 
@@ -322,6 +323,7 @@ function supprimer_message()
     } catch (PDOException $e) {
       echo "Erreur lors de la suppression de la question: " . $e->getMessage();
     }
+    $_SESSION['message_info'] = 'Question Supprimée avec succès !';
     header('Location: message.php');
   }
 }
@@ -336,9 +338,10 @@ function modifier_message()
   $dbh = db_connect();
   $sql_modifier = "UPDATE faq
           set question = :question, 
-          reponse = :reponse
+          reponse = :reponse,
+          dat_question = now(),
+          dat_reponse = now()
           where id_faq = :id_faq;";
-
   $params = array(
     ":question" => $question,
     ":reponse" => $reponse,
@@ -350,8 +353,8 @@ function modifier_message()
   } catch (PDOException $e) {
     echo "Erreur lors de la modification de la question: " . $e->getMessage();
   }
-
-  header("Location: message.php");
+  $_SESSION['message_info'] = 'Question Modifiée avec succès !';
+  header('Location: message.php');
 }
 
 function affichage_modification_messages()
@@ -374,5 +377,14 @@ function affichage_modification_messages()
     }
   } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
+  }
+}
+
+
+function affichage_message_statut()
+{
+  if(isset($_SESSION['message_info']))
+  {
+    echo '<div class="boite_infos"><h2>' . $_SESSION['message_info'] . '</h2></div>';
   }
 }
