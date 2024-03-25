@@ -218,7 +218,7 @@ function deconnexion()
   exit();
 }
 
-
+/* pas utilisé
 function liste_messages_ligue()
 {
   //CONNEXION A LA BDD
@@ -262,7 +262,7 @@ function liste_messages_ligue()
   } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
   }
-}
+} */
 
 function ajouter_message()
 {
@@ -287,7 +287,7 @@ function ajouter_message()
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
   $_SESSION['message_info'] = 'Question Ajoutée avec succès !';
-  header('Location: message.php');
+ // header('Location: message.php');
 }
 
 function footer()
