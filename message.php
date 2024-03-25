@@ -22,7 +22,7 @@ from faq, user PQ, user PR, ligue
 where PQ.id_user = faq.id_user_question
 AND PR.id_user = faq.id_user_reponse
 AND ligue.id_ligue = PQ.id_ligue
-order by dat_question desc;';
+order by faq.id_ligue;';
 
 try {
     if ($session_user_admin) {
