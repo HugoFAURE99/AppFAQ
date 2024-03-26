@@ -1,6 +1,7 @@
 <?php
     include "fonctions/fonctions.php";
 session_start();
+user_non_connecte();
 ?>
 
 

@@ -1,7 +1,4 @@
 <?php
-
-
-
 //FONCTION DE CONNECTION A LA BDD APPFAQ
 function db_connect()
 {
@@ -207,60 +204,22 @@ function userLogin()
       header("location:message.php");
     } else {
       echo "<p> mot de passe incorrect ! </p>";
-
-
       echo count($resultat_login_mdp);
     }
   } else {
-
     echo "<p> Le compte n'existe pas ! </p>";
   }
 }
 
-
-
 // FONCTION DE DECONNEXION 
 function deconnexion()
 {
-
   session_unset(); // Détruit toutes les variables de session
   session_destroy(); // Détruit la session (mais pas le cookie)
   setcookie(session_name(), '', -1, '/'); // Détruit le cookie de session
   // Redirection vers index.php
   header("Location: index.php");
   exit();
-}
-
-
-function liste_messages_ligue()
-{
-  //CONNEXION A LA BDD
-  $dbh = db_connect();
-  $id_ligue = $_SESSION['id_ligue'];
-
-  $sql_affichage_Q_R =
-    "SELECT user_question.pseudo AS pseudo_question, faq.question, user_reponse.pseudo AS pseudo_reponse, faq.reponse
-  FROM faq, user AS user_question, user AS user_reponse
-  WHERE faq.id_user_question = user_question.id_user
-  AND faq.id_user_reponse = user_reponse.id_user
-  AND faq.id_ligue = :id_ligue
-  ORDER BY faq.dat_question DESC;";
-
-  try {
-    $sth = $dbh->prepare($sql_affichage_Q_R);
-    $sth->execute(array(':id_ligue' => $id_ligue));
-    $resultats = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-    //PERMET DE NE PAS ECRASER LES DONNEES AVEC DES INDEXES
-    foreach ($resultats as $index => $resultat) {
-      $_SESSION['pseudo_question_' . $index] = $resultat['pseudo_question'];
-      $_SESSION['texte_question_' . $index] = $resultat['question'];
-      $_SESSION['pseudo_reponse_' . $index] = $resultat['pseudo_reponse'];
-      $_SESSION['texte_reponse_' . $index] = $resultat['reponse'];
-    }
-  } catch (PDOException $ex) {
-    die("Erreur lors de la requête SQL : " . $ex->getMessage());
-  }
 }
 
 function ajouter_message()
@@ -270,8 +229,8 @@ function ajouter_message()
   $question = isset($_POST['question']) ? $_POST['question'] : '';
 
   $dbh = db_connect();
-  $sql = "INSERT INTO faq (question, dat_question, id_user_question, id_user_reponse, id_ligue) 
-            VALUES (:question, NOW(), :id_user, 999, :id_ligue)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
+  $sql = "INSERT INTO faq (question, dat_question, id_user_question, id_ligue, reponse, id_user_reponse) 
+          VALUES (:question, NOW(), :id_user, :id_ligue, '', 999)"; //la réponse est "Pas de réponse !" par défaut, et c'est l'user 999 qui l'écrit (je peux pas mettre NULL, il faut forcément un user réponse)
 
   $params = array(
     ":question" => $question,
@@ -282,10 +241,11 @@ function ajouter_message()
   try {
     $sth = $dbh->prepare($sql);
     $sth->execute($params);
-    echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
   } catch (PDOException $e) {
     echo "Erreur lors de l'insertion de la question: " . $e->getMessage();
   }
+  $_SESSION['message_info'] = 'Question Ajoutée avec succès !';
+  header('Location: message.php');
 }
 
 function footer()
@@ -297,7 +257,6 @@ function footer()
 
 function admin_check()
 {
-
   if ($_SESSION['id_usertype'] == 0) {
     header("Location: message.php");
     exit();
@@ -306,60 +265,93 @@ function admin_check()
 
 
 
-function supprimer_message() {
-
+function supprimer_message()
+{
   $dbh = db_connect();
-
   $id_faq = $_GET['id_faq'];
   $submit = isset($_POST['submit_suppr']);
-
-  $sql="DELETE FROM faq WHERE id_faq=:id_faq;";
-
+  $sql = "DELETE FROM faq WHERE id_faq=:id_faq;";
   $params = array(
-    ":id_faq" => $id_faq );
-
-  if($submit){
+    ":id_faq" => $id_faq
+  );
+  if ($submit) {
     try {
       $sth = $dbh->prepare($sql);
       $sth->execute($params);
-      echo "Question insérée avec succès."; //juste pour le débug, on peut l'enlever à la fin
     } catch (PDOException $e) {
       echo "Erreur lors de la suppression de la question: " . $e->getMessage();
     }
-
+    $_SESSION['message_info'] = 'Question Supprimée avec succès !';
     header('Location: message.php');
   }
-
 }
 
+function modifier_message()
+{
 
-function modifier_message() {
-
-
+  $id_faq = $_GET['id_faq'];
+  $id_user = $_SESSION['id_user'];
   $question = isset($_POST['question']) ? $_POST['question'] : '';
   $reponse = isset($_POST['reponse']) ? $_POST['reponse'] : '';
-  $id_faq = $_GET['id_faq'];
-
   $dbh = db_connect();
   $sql_modifier = "UPDATE faq
           set question = :question, 
-          reponse = :reponse
-          where id_faq = :id;";
-
+          reponse = :reponse,
+          dat_question = now(),
+          dat_reponse = now(),
+          id_user_reponse = :id_user_reponse
+          where id_faq = :id_faq;";
   $params = array(
     ":question" => $question,
     ":reponse" => $reponse,
-    ":id_faq" => $id_faq
+    ":id_faq" => $id_faq,
+    ":id_user_reponse" => $id_user
   );
-
   try {
     $sth = $dbh->prepare($sql_modifier);
     $sth->execute($params);
-    echo "Question modifiée."; //juste pour le débug, on peut l'enlever à la fin
   } catch (PDOException $e) {
     echo "Erreur lors de la modification de la question: " . $e->getMessage();
   }
+  $_SESSION['message_info'] = 'Question Modifiée avec succès !';
+  header('Location: message.php');
+}
+
+function affichage_modification_messages()
+{
+  $dbh = db_connect();
+  $id_faq = $_GET['id_faq'];
+
+  $sql_affichage_modif_Q_R =
+    "SELECT question, reponse
+     FROM faq
+     WHERE id_faq=:id_faq";
+  try {
+    $sth = $dbh->prepare($sql_affichage_modif_Q_R);
+    $sth->execute(array(':id_faq' => $id_faq));
+    $resultats = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($resultats as $resultat) {
+      $_SESSION['question_modifier'] = $resultat['question'];
+      $_SESSION['reponse_modifier'] = $resultat['reponse'];
+    }
+  } catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+  }
+}
+
+
+function affichage_message_statut()
+{
+  if (isset($_SESSION['message_info'])) {
+    echo '<div class="boite_infos"><h2>' . $_SESSION['message_info'] . '</h2></div>';
+  }
+}
 
 
 
+function user_non_connecte() {
+  if (!isset($_SESSION['pseudo'])) {
+    header('Location: index.php');
+  }
 }
