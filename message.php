@@ -1,14 +1,15 @@
 <?php
 include('fonctions/fonctions.php');
 session_start();
-//liste_messages_ligue();
-
-
+user_non_connecte();
 $dbh = db_connect();
 
 $session_user_admin = ($_SESSION['id_usertype'] == 0 || $_SESSION['id_usertype'] == 1);
+
 $session_admin_super_admin = ($_SESSION['id_usertype'] == 1 || $_SESSION['id_usertype'] == 2);
+
 $session_super_admin = ($_SESSION['id_usertype'] == 2);
+
 
 $sql_faq_ligue_user = 'select PQ.pseudo AS PseudoQ, faq.question, PR.pseudo AS PseudoR, faq.reponse, faq.id_faq
 from faq, user PQ, user PR
@@ -22,7 +23,7 @@ from faq, user PQ, user PR, ligue
 where PQ.id_user = faq.id_user_question
 AND PR.id_user = faq.id_user_reponse
 AND ligue.id_ligue = PQ.id_ligue
-order by faq.id_ligue;';
+order by faq.id_ligue, faq.dat_question;';
 
 try {
     if ($session_user_admin) {

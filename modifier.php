@@ -3,6 +3,7 @@
 include('fonctions/fonctions.php');
 session_start();
 admin_check();
+user_non_connecte();
 affichage_modification_messages();
 if (isset($_POST['submit'])) {
     modifier_message();

@@ -1,14 +1,11 @@
 <?php
     include "fonctions/fonctions.php";
-
     session_start();
-
     if (isset($_SESSION['pseudo'])){
         header("Location: index.php");
         exit();
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

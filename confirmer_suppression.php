@@ -2,6 +2,7 @@
 session_start();
 include("fonctions/fonctions.php");
 admin_check();
+user_non_connecte();
 supprimer_message();
 ?>
 

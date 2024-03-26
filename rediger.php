@@ -3,6 +3,7 @@
 <?php
 include('fonctions/fonctions.php');
 session_start();
+user_non_connecte();
 if (isset($_POST['submit'])) {
     ajouter_message();
 }
