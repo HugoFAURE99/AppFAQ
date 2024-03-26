@@ -54,7 +54,7 @@
 
                     <div class="boite_input">
                         <input type="email" name="mail" required="required">
-                        <span>Identifiant</span required="required">
+                        <span>Identifiant/EMail</span required="required">
                     </div>
 
                     <div class="boite_input">
@@ -90,9 +90,11 @@
 
                                 foreach ($lib_ligue_bdd as $row){
 
-                                    echo '<option value="'.$row['id_ligue'].'">'.$row['lib_ligue'].'</option>';
-
+                                        if($row['id_ligue'] != 4){
+                                            echo '<option value="'.$row['id_ligue'].'">'.$row['lib_ligue'].'</option>';
+                                        }
                                     $i++;
+                                    
                                 }
 
                                 echo '<option value="'.($i).'" selected="selected">Choisir une ligue...</option>';

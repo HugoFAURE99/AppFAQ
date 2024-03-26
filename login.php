@@ -46,7 +46,7 @@ include "fonctions/fonctions.php";
 
                     <div class="boite_input">
                         <input type="text" name="pseudo" required="required">
-                        <span>Identifiant</span required="required">
+                        <span>Identifiant / EMail</span required="required">
                     </div>
 
                     <div class="boite_input">
