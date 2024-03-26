@@ -41,6 +41,25 @@
             </div>
 
             <form action="<?php $_SERVER ["PHP_SELF"] ?>" method="POST">
+
+                <?php
+
+                    $submit = isset($_POST["submit"]);
+
+                    if($submit){
+                        db_add_user();
+
+                        if($_GET['user_cree']==true){
+
+                            $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
+                            $_SESSION['pseudo']=$pseudo;
+
+                            echo "<p class='message_validation'> Session de : ".$_SESSION['pseudo']."</p>";
+                        }
+                    }
+                ?>
+
+
                 <div class="zone_formulaire">
 
 
@@ -107,22 +126,7 @@
                 </div>
             </form>
             
-            <?php
-
-                $submit = isset($_POST["submit"]);
-
-                if($submit){
-                    db_add_user();
-
-                    if($_GET['user_cree']==true){
-
-                        $pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : "";
-                        $_SESSION['pseudo']=$pseudo;
-
-                        echo "<p> Session de : ".$_SESSION['pseudo']."</p>";
-                    }
-                }
-            ?>
+           
         </div>
 
         

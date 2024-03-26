@@ -945,9 +945,22 @@ table {
     border-radius: 5px; 
     width: 400px; 
     height: 65px; 
-    background-color: rgba(255, 255, 255, 0.445); 
+    background-color: rgba(65, 199, 65, 0.8); 
     margin: 0 auto; 
     top: 50%; 
     transform: translateY(-100%); 
     color: rgb(255, 255, 255);
+}
+
+
+.message_validation{
+
+    font-size: 125%;
+    background-color: rgb(134, 206, 134);
+    border-style: solid;
+    border-width: 2px;
+    border-color: antiquewhite;
+    padding: 5px;
+
+    width: 75%;
 }
