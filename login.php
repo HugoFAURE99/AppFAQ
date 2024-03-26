@@ -72,11 +72,9 @@ include "fonctions/fonctions.php";
         <div class="sous_login">
             <div class="boite_par_ici">
                 <span>Pas de compte ? Créez le <a href="register.php">ici</a> !</span>
-
             </div>
         </div>
     </div>
-
     <?php footer(); ?>
 </body>
 

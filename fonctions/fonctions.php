@@ -348,10 +348,8 @@ function affichage_message_statut()
   }
 }
 
-
-
 function user_non_connecte() {
-  if (!isset($_SESSION['pseudo'])) {
+  if (!isset($_SESSION['mdp'])) {
     header('Location: index.php');
   }
 }
