@@ -102,10 +102,10 @@ function db_add_user()
     $_GET['user_cree'] = true;
 
     echo "<p class='message_validation'>Compte créé avec succés !</p>";
-    echo "<p class='message_validation'>Redirection vers login dans 5 sec !</p>";
+    echo "<p class='message_validation'>Redirection vers login dans 4 sec !</p>";
 
 
-    header("Refresh: 5; login.php" );
+    header("Refresh: 4; login.php" ); // recharge la page aprés 5 sec et renvoie vers la page login.php
 
     /* echo '<meta http-equiv="refresh" content="5;URL=\'http://localhost/projets/AppFAQ/AppFAQ/login.php\'">'; */ // REDIRECTION APRES 5 SECONDES VERS LOGIN.PHP (ATTENTION L'URL MARCHE SUR MON PC MAIS PAS AILLEURS JE PENSE)
   }
